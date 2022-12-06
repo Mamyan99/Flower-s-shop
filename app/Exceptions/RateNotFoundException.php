@@ -13,6 +13,4 @@ class RateNotFoundException extends BusinessLogicException
     {
         return __('errors.rate_not_found');
     }
-
-
 }

@@ -13,6 +13,7 @@ class DeleteMediaRequest extends FormRequest
         return [
             self::IDS => [
                 'array',
+                'required',
             ],
         ];
     }

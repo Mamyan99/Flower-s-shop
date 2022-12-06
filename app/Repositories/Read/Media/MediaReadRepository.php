@@ -11,9 +11,7 @@ class MediaReadRepository implements MediaReadRepositoryInterface
 {
     public function index(IndexMediaDto $dto): LengthAwarePaginator
     {
-        $query = $this->query();
-
-        return $query->paginate(
+        return $this->query()->paginate(
             $dto->queryListDto->perPage,
             ['*'],
             'page',

@@ -13,6 +13,7 @@ class DeleteProductRequest extends FormRequest
         return [
             self::IDS => [
                 'array',
+                'required',
             ],
         ];
     }

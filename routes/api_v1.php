@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Media\MediaController;
 use App\Http\Controllers\Api\V1\Options\OptionsController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use App\Http\Controllers\Api\V1\Rate\RateController;
+use App\Http\Controllers\Api\V1\ShopCart\ShopCartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -74,5 +75,11 @@ Route::prefix('media')
 Route::prefix('rates')
     ->group(function () {
         Route::post('/create', [RateController::class, 'create']);
-        Route::get('', [MediaController::class, 'index']);
+    });
+
+Route::prefix('shop-cart')
+    ->group(function () {
+        Route::post('/create', [ShopCartController::class, 'create']);
+        Route::get('', [ShopCartController::class, 'index']);
+        Route::delete('/delete', [ShopCartController::class, 'delete']);
     });

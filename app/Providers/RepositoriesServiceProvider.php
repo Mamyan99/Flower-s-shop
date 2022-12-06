@@ -12,6 +12,8 @@ use App\Repositories\Read\Product\ProductReadRepository;
 use App\Repositories\Read\Product\ProductReadRepositoryInterface;
 use App\Repositories\Read\Rate\RateReadRepository;
 use App\Repositories\Read\Rate\RateReadRepositoryInterface;
+use App\Repositories\Read\ShopCart\ShopCartReadRepository;
+use App\Repositories\Read\ShopCart\ShopCartReadRepositoryInterface;
 use App\Repositories\Read\User\UserReadRepository;
 use App\Repositories\Read\User\UserReadRepositoryInterface;
 use App\Repositories\Write\Category\CategoryWriteRepository;
@@ -24,6 +26,8 @@ use App\Repositories\Write\Product\ProductWriteRepository;
 use App\Repositories\Write\Product\ProductWriteRepositoryInterface;
 use App\Repositories\Write\Rate\RateWriteRepository;
 use App\Repositories\Write\Rate\RateWriteRepositoryInterface;
+use App\Repositories\Write\ShopCart\ShopCartWriteRepository;
+use App\Repositories\Write\ShopCart\ShopCartWriteRepositoryInterface;
 use App\Repositories\Write\User\UserWriteRepository;
 use App\Repositories\Write\User\UserWriteRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -79,6 +83,14 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(
             RateWriteRepositoryInterface::class,
             RateWriteRepository::class
+        );
+        $this->app->bind(
+            ShopCartReadRepositoryInterface::class,
+            ShopCartReadRepository::class
+        );
+        $this->app->bind(
+            ShopCartWriteRepositoryInterface::class,
+            ShopCartWriteRepository::class
         );
     }
 }

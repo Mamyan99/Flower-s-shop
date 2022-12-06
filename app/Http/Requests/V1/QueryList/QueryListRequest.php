@@ -7,7 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class QueryListRequest extends FormRequest
 {
     const Q = 'query';
-    const SORT = 'sort';
     const PAGE = 'page';
     const PER_PAGE = 'perPage';
 
@@ -18,10 +17,6 @@ class QueryListRequest extends FormRequest
     {
         return [
             self::Q => [
-                'string',
-                'nullable',
-            ],
-            self::SORT => [
                 'string',
                 'nullable',
             ],
@@ -39,11 +34,6 @@ class QueryListRequest extends FormRequest
     public function getQ(): ?string
     {
         return $this->get(self::Q) ?? null;
-    }
-
-    public function getSort(): ?string
-    {
-        return $this->get(self::SORT) ?? null;
     }
 
     public function getPage(): ?int

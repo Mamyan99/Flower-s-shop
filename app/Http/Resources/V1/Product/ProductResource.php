@@ -6,6 +6,7 @@ use App\Http\Resources\V1\Category\CategoryResource;
 use App\Http\Resources\V1\Media\MediaResource;
 use App\Http\Resources\V1\Options\OptionsResource;
 use App\Http\Resources\V1\Rate\RateResource;
+use App\Models\ShopCart\ShopCart;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

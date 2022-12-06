@@ -40,7 +40,6 @@ class Category extends Model
     {
         $category = new static();
 
-        $category->setCategoryId();
         $category->setParentId($dto->parentId);
         $category->setName($dto->name);
         $category->setSlug($dto->name);
@@ -57,10 +56,6 @@ class Category extends Model
         $this->setSlug($dto->categoryDto->name);
         $this->short_description = $dto->categoryDto->shortDescription;
         $this->description = $dto->categoryDto->description;
-    }
-
-    public function setCategoryId(): string {
-        return Uuid::generate();
     }
 
     public function setParentId(string|null $parentId): void

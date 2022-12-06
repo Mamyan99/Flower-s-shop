@@ -13,6 +13,7 @@ class DeleteOptionsRequest extends FormRequest
         return [
             self::IDS => [
                 'array',
+                'required',
             ],
         ];
     }
