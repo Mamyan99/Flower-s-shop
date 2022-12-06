@@ -6,6 +6,7 @@ use App\Models\Category\Category;
 use App\Models\Helpers\Uuid;
 use App\Models\Options\Options;
 use App\Models\Rate\Rate;
+use App\Models\ShopCart\ShopCart;
 use App\Services\Product\Dto\ProductDto;
 use App\Services\Product\Dto\UpdateProductDto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,7 +48,6 @@ class Product extends Model
     {
         $product = new static();
 
-        $product->setProductId();
         $product->setName($dto->name);
         $product->setSlug($dto->name);
         $product->setShortDescription($dto->shortDescription);
@@ -68,10 +68,6 @@ class Product extends Model
         $this->price = $dto->productDto->price;
         $this->currency = $dto->productDto->currency;
         $this->available_count = $dto->productDto->availableCount;
-    }
-
-    public function setProductId(): string {
-        return Uuid::generate();
     }
 
     public function setName(string $name): void
@@ -131,6 +127,11 @@ class Product extends Model
     public function rates(): HasMany
     {
         return $this->hasMany(Rate::class);
+    }
+
+    public function shopCart(): HasMany
+    {
+        return $this->hasMany(ShopCart::class);
     }
 
     public function media(): morphToMany{

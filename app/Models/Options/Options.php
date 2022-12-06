@@ -37,7 +37,6 @@ class Options extends Model
     {
         $options = new static();
 
-        $options->setOptionsId();
         $options->setName($dto->name);
         $options->setSlug($dto->name);
         $options->setValue($dto->value);
@@ -52,10 +51,6 @@ class Options extends Model
         $this->setSlug($dto->optionsDto->name);
         $this->value = $dto->optionsDto->value;
         $this->type = $dto->optionsDto->type;
-    }
-
-    public function setOptionsId(): string {
-        return Uuid::generate();
     }
 
     public function setName(string $name): void

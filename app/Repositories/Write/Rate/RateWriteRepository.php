@@ -18,9 +18,4 @@ class RateWriteRepository implements RateWriteRepositoryInterface
 
         return $rate;
     }
-
-    private function query(): Builder
-    {
-        return Rate::query();
-    }
 }

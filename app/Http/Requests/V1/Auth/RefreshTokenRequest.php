@@ -6,8 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RefreshTokenRequest extends FormRequest
 {
-    const USER_ID = 'userId';
-    const REFRESH_TOKEN = 'refreshToken';
+    const USER_ID = 'user_id';
+    const REFRESH_TOKEN = 'refresh_token';
 
     public function rules(): array
     {

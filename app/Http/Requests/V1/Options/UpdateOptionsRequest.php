@@ -12,6 +12,7 @@ class UpdateOptionsRequest extends BaseOptionsRequest
         return [
             self::ID => [
                 'string',
+                'required',
             ]
         ];
     }

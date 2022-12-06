@@ -13,12 +13,6 @@ class RateController extends Controller
     public function __construct(
         protected CreateOrUpdateRateAction $createOrUpdateRateAction,
     ) {}
-//    public function index(IndexRateRequest $request): AnonymousResourceCollection
-//    {
-//        $dto = IndexRateRequest::fromRequest($request);
-//
-//        return $this->->run($dto);
-//    }
 
     public function create(CreateOrUpdateRateRequest $request): RateResource
     {

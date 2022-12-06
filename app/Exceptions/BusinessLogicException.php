@@ -15,6 +15,7 @@ abstract class BusinessLogicException extends Exception
     const PRODUCT_DOES_NOT_EXIST = 606;
     const IS_NOT_ADMIN = 607;
     const RATE_DOES_NOT_EXIST = 608;
+    const SHOP_CART_DOES_NOT_EXIST = 609;
 
     private int $httpStatusCode = Response::HTTP_BAD_REQUEST;
 

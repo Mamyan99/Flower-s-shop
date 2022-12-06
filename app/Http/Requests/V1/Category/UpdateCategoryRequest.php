@@ -12,6 +12,7 @@ class UpdateCategoryRequest extends BaseCategoryRequest
         return [
             self::ID => [
                 'string',
+                'required',
             ]
         ];
     }
