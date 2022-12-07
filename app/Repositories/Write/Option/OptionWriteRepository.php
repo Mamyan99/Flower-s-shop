@@ -1,26 +1,22 @@
 <?php
 
-namespace App\Repositories\Write\Product;
+namespace App\Repositories\Write\Option;
 
 use App\Exceptions\DeleteErrorException;
 use App\Exceptions\SavingErrorException;
-use App\Models\Product\Product;
+use App\Models\Option\Option;
 use Illuminate\Database\Eloquent\Builder;
 
-class ProductWriteRepository implements ProductWriteRepositoryInterface
+class OptionWriteRepository implements OptionWriteRepositoryInterface
 {
-    public function  save(Product $product, array $categoriesIds, array $optionsIds, array $mediaIds): Product
+    public function  save(Option $option): Option
     {
-        if (!$product->save())
+        if (!$option->save())
         {
             throw new SavingErrorException();
         }
 
-        $product->category()->sync($categoriesIds);
-        $product->option()->sync($optionsIds);
-        $product->media()->sync($mediaIds);
-
-        return $product;
+        return $option;
     }
 
     public function delete(array $ids): bool
@@ -37,6 +33,6 @@ class ProductWriteRepository implements ProductWriteRepositoryInterface
 
     private function query(): Builder
     {
-        return Product::query();
+        return Option::query();
     }
 }

@@ -11,7 +11,7 @@ abstract class BusinessLogicException extends Exception
     const USER_NOT_FOUND = 602;
     const DELETE_ERROR = 603;
     const CATEGORY_DOES_NOT_EXIST = 604;
-    const OPTIONS_DOES_NOT_EXIST = 605;
+    const OPTION_DOES_NOT_EXIST = 605;
     const PRODUCT_DOES_NOT_EXIST = 606;
     const IS_NOT_ADMIN = 607;
     const RATE_DOES_NOT_EXIST = 608;

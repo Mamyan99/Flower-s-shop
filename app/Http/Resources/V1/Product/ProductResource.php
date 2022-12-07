@@ -4,7 +4,7 @@ namespace App\Http\Resources\V1\Product;
 
 use App\Http\Resources\V1\Category\CategoryResource;
 use App\Http\Resources\V1\Media\MediaResource;
-use App\Http\Resources\V1\Options\OptionsResource;
+use App\Http\Resources\V1\Option\OptionResource;
 use App\Http\Resources\V1\Rate\RateResource;
 use App\Models\ShopCart\ShopCart;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -38,7 +38,7 @@ class ProductResource extends JsonResource
             'ratesAverageCount' => $this->resource->rates_avg_value,
             'ratesCount' => $this->resource->rates_count,
             'categories' => CategoryResource::collection($this->whenLoaded('category')),
-            'options' => OptionsResource::collection($this->whenLoaded('options')),
+            'options' => OptionResource::collection($this->whenLoaded('option')),
             'media' => MediaResource::collection($this->whenLoaded('media')),
         ];
     }

@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Category\CategoryController;
 use App\Http\Controllers\Api\V1\Media\MediaController;
-use App\Http\Controllers\Api\V1\Options\OptionsController;
+use App\Http\Controllers\Api\V1\Option\OptionController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use App\Http\Controllers\Api\V1\Rate\RateController;
 use App\Http\Controllers\Api\V1\ShopCart\ShopCartController;
@@ -54,12 +54,12 @@ Route::prefix('categories')
 
 Route::prefix('options')
     ->group(function () {
-        Route::post('/create', [OptionsController::class, 'create'])
+        Route::post('/create', [OptionController::class, 'create'])
             ->middleware(['auth:api', 'admin']);
-        Route::get('', [OptionsController::class, 'index']);
-        Route::put('/update/{id}', [OptionsController::class, 'update'])
+        Route::get('', [OptionController::class, 'index']);
+        Route::put('/update/{id}', [OptionController::class, 'update'])
             ->middleware(['auth:api', 'admin']);
-        Route::delete('delete', [OptionsController::class, 'delete'])
+        Route::delete('delete', [OptionController::class, 'delete'])
             ->middleware(['auth:api', 'admin']);
     });
 

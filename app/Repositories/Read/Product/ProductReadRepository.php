@@ -7,26 +7,15 @@ use App\Models\Product\Product;
 use App\Services\Product\Dto\IndexProductDto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use MeiliSearch\Endpoints\Indexes;
 
 class ProductReadRepository implements ProductReadRepositoryInterface
 {
     public function index(IndexProductDto $dto): LengthAwarePaginator
     {
         return Product::search($dto->queryListDto->q)
-            ->query(function (Builder $query) use ($dto){
-                $query->with(['category', 'options', 'media'])
-                    ->withAvg(relation: 'rates', column: 'value')
-                    ->withCount('rates')
-                    ->when($dto->categoriesIds, function ($query) use ($dto) {
-                        $query->whereHas('category', function ($q) use ($dto) {
-                            return $q->whereIn('category_id', $dto->categoriesIds);
-                        });
-                    })
-                    ->when($dto->optionsIds, function ($query) use ($dto) {
-                        $query->whereHas('options', function ($q) use ($dto) {
-                            return $q->whereIn('options_id', $dto->optionsIds);
-                        });
-                    });
+            ->query(function (Builder $query) use ($dto) {
+                $this->filter($query, $dto);
             })->paginate(
                 $dto->queryListDto->perPage,
                 'page',
@@ -51,5 +40,36 @@ class ProductReadRepository implements ProductReadRepositoryInterface
     private function query(): Builder
     {
         return Product::query();
+    }
+
+    private function filter(Builder $query, IndexProductDto $dto): void
+    {
+        $query
+            ->when($dto->minValue, function ($query) use ($dto) {
+             $query->where($dto->filterValue, '>', $dto->minValue);
+        })
+            ->when($dto->maxValue, function ($query) use ($dto) {
+                return $query->where($dto->filterValue, '<', $dto->maxValue);
+            })
+            ->when($dto->minValue & $dto->maxValue, function ($query) use ($dto) {
+                return $query->where($dto->filterValue, '>', $dto->minValue)
+                    ->where($dto->filterValue, '<', $dto->maxValue);
+            })
+            ->with(['category', 'option', 'media'])
+            ->when($dto->categoriesIds, function ($query) use ($dto) {
+                $query->whereHas('category', function ($q) use ($dto) {
+                    return $q->whereIn('category_id', $dto->categoriesIds);
+                });
+            })
+            ->when($dto->optionsIds, function ($query) use ($dto) {
+                $query->whereHas('option', function ($q) use ($dto) {
+                    return $q->whereIn('option_id', $dto->optionsIds);
+                });
+            })
+            ->withAvg(relation: 'rates', column: 'value')
+            ->withCount('rates')
+            ->when($dto->sortValue, function ($query) use ($dto) {
+                return $query->orderBy($dto->sortValue, $dto->sort);
+            });
     }
 }
