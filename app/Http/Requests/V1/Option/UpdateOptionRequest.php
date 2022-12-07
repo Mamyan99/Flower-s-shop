@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\V1\Category;
+namespace App\Http\Requests\V1\Option;
 
 
-class UpdateCategoryRequest extends BaseCategoryRequest
+class UpdateOptionRequest extends BaseOptionRequest
 {
     const ID = 'id';
 

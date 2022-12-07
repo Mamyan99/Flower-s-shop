@@ -17,7 +17,7 @@ class UpdateProductAction
     public function run(UpdateProductDto $dto): ProductResource
     {
             $product = $this->productReadRepository->getById($dto->id);
-            $product->updateOptions($dto);
+            $product->updateProduct($dto);
             $this->productWriteRepository->save($product, $dto->productDto->categoriesIds, $dto->productDto->optionsIds, $dto->productDto->mediaIds);
 
         return new ProductResource($product);

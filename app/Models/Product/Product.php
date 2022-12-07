@@ -4,7 +4,8 @@ namespace App\Models\Product;
 
 use App\Models\Category\Category;
 use App\Models\Helpers\Uuid;
-use App\Models\Options\Options;
+use App\Models\Option\Option;
+use App\Models\Order\Order;
 use App\Models\Rate\Rate;
 use App\Models\ShopCart\ShopCart;
 use App\Services\Product\Dto\ProductDto;
@@ -26,6 +27,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $available_count
  * @property float|null $price
  * @property string $currency
+ * @property mixed $id
  */
 class Product extends Model
 {
@@ -59,7 +61,7 @@ class Product extends Model
         return $product;
     }
 
-    public function updateOptions(UpdateProductDto $dto): void
+    public function updateProduct(UpdateProductDto $dto): void
     {
         $this->name = $dto->productDto->name;
         $this->setSlug($dto->productDto->name);
@@ -115,13 +117,22 @@ class Product extends Model
         )->withPivot(['category_id', 'product_id']);
     }
 
-    public function options(): BelongsToMany{
+    public function option(): BelongsToMany{
         return $this->belongsToMany(
-            Options::class,
-            'product_options',
+            Option::class,
+            'product_option',
             'product_id',
-            'options_id',
-        )->withPivot(['options_id', 'product_id']);
+            'option_id',
+        )->withPivot(['option_id', 'product_id']);
+    }
+
+    public function order(): BelongsToMany{
+        return $this->belongsToMany(
+            Order::class,
+            'product_order',
+            'product_id',
+            'order_id',
+        )->withPivot(['order_id', 'product_id']);
     }
 
     public function rates(): HasMany
@@ -147,7 +158,7 @@ class Product extends Model
     {
         $array = $this->only('name', 'short_description', 'description');
 
-        $related = $this->with(['category', 'options', 'media', 'rates'])
+        $related = $this->with(['category', 'option', 'media', 'rates'])
             ->where('id', $this->id)
             ->first()
             ->toArray();

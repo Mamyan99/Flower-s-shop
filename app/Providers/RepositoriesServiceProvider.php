@@ -6,8 +6,8 @@ use App\Repositories\Read\Category\CategoryReadRepository;
 use App\Repositories\Read\Category\CategoryReadRepositoryInterface;
 use App\Repositories\Read\Media\MediaReadRepository;
 use App\Repositories\Read\Media\MediaReadRepositoryInterface;
-use App\Repositories\Read\Options\OptionsReadRepository;
-use App\Repositories\Read\Options\OptionsReadRepositoryInterface;
+use App\Repositories\Read\Option\OptionReadRepository;
+use App\Repositories\Read\Option\OptionReadRepositoryInterface;
 use App\Repositories\Read\Product\ProductReadRepository;
 use App\Repositories\Read\Product\ProductReadRepositoryInterface;
 use App\Repositories\Read\Rate\RateReadRepository;
@@ -20,8 +20,8 @@ use App\Repositories\Write\Category\CategoryWriteRepository;
 use App\Repositories\Write\Category\CategoryWriteRepositoryInterface;
 use App\Repositories\Write\Media\MediaWriteRepository;
 use App\Repositories\Write\Media\MediaWriteRepositoryInterface;
-use App\Repositories\Write\Options\OptionsWriteRepository;
-use App\Repositories\Write\Options\OptionsWriteRepositoryInterface;
+use App\Repositories\Write\Option\OptionWriteRepository;
+use App\Repositories\Write\Option\OptionWriteRepositoryInterface;
 use App\Repositories\Write\Product\ProductWriteRepository;
 use App\Repositories\Write\Product\ProductWriteRepositoryInterface;
 use App\Repositories\Write\Rate\RateWriteRepository;
@@ -61,12 +61,12 @@ class RepositoriesServiceProvider extends ServiceProvider
             CategoryReadRepository::class
         );
         $this->app->bind(
-            OptionsWriteRepositoryInterface::class,
-            OptionsWriteRepository::class
+            OptionWriteRepositoryInterface::class,
+            OptionWriteRepository::class
         );
         $this->app->bind(
-            OptionsReadRepositoryInterface::class,
-            OptionsReadRepository::class
+            OptionReadRepositoryInterface::class,
+            OptionReadRepository::class
         );
         $this->app->bind(
             MediaWriteRepositoryInterface::class,
