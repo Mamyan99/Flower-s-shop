@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Category\CategoryController;
 use App\Http\Controllers\Api\V1\Media\MediaController;
 use App\Http\Controllers\Api\V1\Option\OptionController;
+use App\Http\Controllers\Api\V1\Order\OrderController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use App\Http\Controllers\Api\V1\Rate\RateController;
 use App\Http\Controllers\Api\V1\ShopCart\ShopCartController;
@@ -82,4 +83,12 @@ Route::prefix('shop-cart')
         Route::post('/create', [ShopCartController::class, 'create']);
         Route::get('', [ShopCartController::class, 'index']);
         Route::delete('/delete', [ShopCartController::class, 'delete']);
+    });
+
+Route::prefix('order')
+    ->group(function () {
+        Route::post('/create', [OrderController::class, 'create']);
+        Route::get('', [OrderController::class, 'index']);
+        Route::delete('/delete', [OrderController::class, 'delete']);
+        Route::put('/update', [OrderController::class, 'update']);
     });

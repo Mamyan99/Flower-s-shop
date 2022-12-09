@@ -8,6 +8,8 @@ use App\Repositories\Read\Media\MediaReadRepository;
 use App\Repositories\Read\Media\MediaReadRepositoryInterface;
 use App\Repositories\Read\Option\OptionReadRepository;
 use App\Repositories\Read\Option\OptionReadRepositoryInterface;
+use App\Repositories\Read\Order\OrderReadRepository;
+use App\Repositories\Read\Order\OrderReadRepositoryInterface;
 use App\Repositories\Read\Product\ProductReadRepository;
 use App\Repositories\Read\Product\ProductReadRepositoryInterface;
 use App\Repositories\Read\Rate\RateReadRepository;
@@ -22,6 +24,8 @@ use App\Repositories\Write\Media\MediaWriteRepository;
 use App\Repositories\Write\Media\MediaWriteRepositoryInterface;
 use App\Repositories\Write\Option\OptionWriteRepository;
 use App\Repositories\Write\Option\OptionWriteRepositoryInterface;
+use App\Repositories\Write\Order\OrderWriteRepository;
+use App\Repositories\Write\Order\OrderWriteRepositoryInterface;
 use App\Repositories\Write\Product\ProductWriteRepository;
 use App\Repositories\Write\Product\ProductWriteRepositoryInterface;
 use App\Repositories\Write\Rate\RateWriteRepository;
@@ -91,6 +95,14 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(
             ShopCartWriteRepositoryInterface::class,
             ShopCartWriteRepository::class
+        );
+        $this->app->bind(
+            OrderWriteRepositoryInterface::class,
+            OrderWriteRepository::class
+        );
+        $this->app->bind(
+            OrderReadRepositoryInterface::class,
+            OrderReadRepository::class
         );
     }
 }

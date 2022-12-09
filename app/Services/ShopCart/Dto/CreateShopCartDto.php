@@ -10,7 +10,7 @@ class CreateShopCartDto extends DataTransferObject
     public string $productId;
     public string $costumerUniqKey;
     public int $productsCount;
-    public bool $bought;
+    public bool $supplement;
 
     public static function fromRequest(CreateShopCartRequest $request): self
     {
@@ -18,7 +18,7 @@ class CreateShopCartDto extends DataTransferObject
             productId: $request->getProductId(),
             costumerUniqKey: $request->getCostumerUniqKey(),
             productsCount: $request->getProductCounts(),
-            bought: $request->getBought()
+            supplement: $request->getSupplement(),
         );
     }
 }

@@ -9,7 +9,7 @@ class CreateShopCartRequest extends FormRequest
     const PRODUCT_ID = 'product_id';
     const COSTUMER_UNIQ_KEY = 'costumer_uniq_key';
     const PRODUCTS_COUNT = 'products_count';
-    //const BOUGHT = 'bought';
+    const SUPPLEMENT = 'supplement';
 
     public function rules()
     {
@@ -26,9 +26,10 @@ class CreateShopCartRequest extends FormRequest
                 'int',
                 'required',
             ],
-//            self::BOUGHT => [
-//                'bool',
-//            ],
+            self::SUPPLEMENT => [
+                'boolean',
+                'required',
+            ],
         ];
     }
 
@@ -47,8 +48,8 @@ class CreateShopCartRequest extends FormRequest
         return $this->get(self::PRODUCTS_COUNT);
     }
 
-    public function getBought(): bool
+    public function getSupplement(): bool
     {
-        return false;
+        return $this->get(self::SUPPLEMENT);
     }
 }

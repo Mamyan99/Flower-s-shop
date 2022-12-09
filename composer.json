@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.7",
         "meilisearch/meilisearch-php": "^0.25.0",
         "spatie/data-transfer-object": "^3.9",
-        "spatie/laravel-medialibrary": "^9.6.0"
+        "spatie/laravel-medialibrary": "^9.6.0",
+      "ext-http": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

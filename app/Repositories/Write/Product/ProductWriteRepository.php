@@ -15,7 +15,6 @@ class ProductWriteRepository implements ProductWriteRepositoryInterface
         {
             throw new SavingErrorException();
         }
-
         $product->category()->sync($categoriesIds);
         $product->option()->sync($optionsIds);
         $product->media()->sync($mediaIds);
