@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
@@ -83,10 +84,11 @@ class Category extends Model
         $this->slug = Str::slug($name, '_');
     }
 
-    public function parent(): BelongsTo
+    public function children(): HasMany
     {
-        return $this->belongsTo(Category::class, 'parent_id', 'id');
+        return $this->hasMany(Category::class, 'parent_id', 'id')->with('children');
     }
+
 
     public function product(): BelongsToMany
     {

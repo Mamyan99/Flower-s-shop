@@ -23,6 +23,7 @@ class CategoryResource extends JsonResource
             'slug' => $this->resource->slug,
             'shortDescription' => $this->resource->short_description,
             'description' => $this->resource->description,
+            'subCategories' => CategoryResource::collection($this->resource->children) ?? null
         ];
     }
 }

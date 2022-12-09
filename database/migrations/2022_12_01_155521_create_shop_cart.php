@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('costumer_uniq_key')->index();
             $table->string('product_id')->index();
             $table->integer('products_count');
-            $table->boolean('bought');
+            $table->boolean('bought')->default(false);
             $table->timestamps();
 
             $table->foreign('product_id')

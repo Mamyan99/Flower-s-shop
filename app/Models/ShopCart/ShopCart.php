@@ -4,6 +4,7 @@ namespace App\Models\ShopCart;
 
 use App\Models\Helpers\Uuid;
 use App\Models\Product\Product;
+use App\Services\ShopCart\Dto\CreateShopCartDto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,7 @@ use Laravel\Scout\Searchable;
  * @property string $costumer_uniq_key
  * @property int $products_count
  * @property bool $bought
+ * @property mixed $id
  */
 class ShopCart extends Model
 {
@@ -38,9 +40,18 @@ class ShopCart extends Model
         $shopCart->setProductId($dto->productId);
         $shopCart->setCostumerUniqKey($dto->costumerUniqKey);
         $shopCart->setProductsCount($dto->productsCount);
-        $shopCart->setBought($dto->bought);
 
         return $shopCart;
+    }
+
+    public function updateProductCount(int $updateProductsCount): void
+    {
+        $this->products_count = $updateProductsCount;
+    }
+
+    public function updateBought(bool $bought): void
+    {
+        $this->bought = $bought;
     }
 
     public function setProductId(string $productId): void
@@ -56,11 +67,6 @@ class ShopCart extends Model
     public function setProductsCount(int $productsCount): void
     {
         $this->products_count = $productsCount;
-    }
-
-    public function setBought(bool $bought): void
-    {
-        $this->bought = $bought;
     }
 
     public function product(): BelongsTo

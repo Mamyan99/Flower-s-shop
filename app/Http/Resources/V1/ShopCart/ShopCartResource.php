@@ -14,7 +14,7 @@ class ShopCartResource extends JsonResource
             'productId' => $this->resource->product_id,
             'costumerUniqKey' => $this->resource->costumer_uniq_key,
             'productsCount' => $this->resource->products_count,
-            'bought' => $this->resource->bought,
+            'bought' => $this->resource->bought ?? false,
             'product' => new ProductResource($this->whenLoaded('product')),
         ];
     }
