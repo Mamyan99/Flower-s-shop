@@ -20,6 +20,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property float $rates_avg_value
  * @property integer $rates_count
  * @property string $media_id
+ * @property float $discount
  */
 
 class ProductResource extends JsonResource
@@ -35,11 +36,20 @@ class ProductResource extends JsonResource
             'price' => $this->resource->price,
             'currency' => $this->resource->currency,
             'availableCount' => $this->resource->available_count,
+            'boughtProductsCount' => $this->resource->bought_products_count,
+            'discount' => $this->resource->discount,
+            'discountedPrice' => $this->getDiscountedPrice(),
             'ratesAverageCount' => $this->resource->rates_avg_value,
             'ratesCount' => $this->resource->rates_count,
-            'categories' => CategoryResource::collection($this->whenLoaded('category')),
-            'options' => OptionResource::collection($this->whenLoaded('option')),
-            'media' => MediaResource::collection($this->whenLoaded('media')),
+            'created_at' => $this->resource->created_at,
+           // 'categories' => CategoryResource::collection($this->whenLoaded('category')),
+           // 'options' => OptionResource::collection($this->whenLoaded('option')),
+           // 'media' => MediaResource::collection($this->whenLoaded('media')),
         ];
+    }
+
+    private function getDiscountedPrice()
+    {
+        return ($this->resource->discount)?$this->resource->price - ($this->resource->price * $this->resource->discount)/100 : null;
     }
 }

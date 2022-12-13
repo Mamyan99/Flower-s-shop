@@ -16,6 +16,7 @@ class ProductDto extends DataTransferObject
     public int $availableCount;
     public array $categoriesIds;
     public array $optionsIds;
+    public float $discount;
 
     public static function fromRequest(BaseProductRequest $request): self
     {
@@ -28,7 +29,8 @@ class ProductDto extends DataTransferObject
             currency: $request->getCurrency(),
             availableCount: $request->getAvailableCount(),
             categoriesIds: $request->getCategoriesIds(),
-            optionsIds: $request->getOptionsIds()
+            optionsIds: $request->getOptionsIds(),
+            discount: $request->getDiscount(),
         );
     }
 }

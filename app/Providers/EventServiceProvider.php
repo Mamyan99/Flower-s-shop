@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Events\ShopCart\ChangeShopCartBoughtEvent;
-use App\Listener\ShopCart\ChangeShopCartBoughtListener;
+use App\Events\GetWebHookEvent;
+use App\Listener\ChangeProductBoughtCountListener;
+use App\Listener\ChangeShopCartBoughtListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,8 +20,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        ChangeShopCartBoughtEvent::class => [
-            ChangeShopCartBoughtListener::class
+        GetWebHookEvent::class => [
+           // ChangeShopCartBoughtListener::class,
+            ChangeProductBoughtCountListener::class,
         ]
     ];
 

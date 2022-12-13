@@ -32,6 +32,7 @@ class CreateShopCartAction
 
             $shopCart->updateProductCount($updateProductsCount);
 
+
         } catch(ShopCartDoesNotExistExecption $e)
         {
             $shopCart = ShopCart::create($dto);

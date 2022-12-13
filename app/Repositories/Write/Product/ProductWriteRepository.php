@@ -34,6 +34,14 @@ class ProductWriteRepository implements ProductWriteRepositoryInterface
         return true;
     }
 
+    public function addBoughtCount(string $costumerUniqKey, array $productIds)
+    {
+           $this->query()
+                ->whereIn('id', $productIds)
+                ->where('costumer_uniq_key', $costumerUniqKey)
+                ->increment('bought_products_count');
+    }
+
     private function query(): Builder
     {
         return Product::query();

@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\BaseConstants\BaseConstans;
 use App\Models\Category\Category;
 use App\Models\Helpers\Uuid;
 use App\Models\Option\Option;
@@ -28,6 +29,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property float|null $price
  * @property string $currency
  * @property mixed $id
+ * @property string $discount
  */
 class Product extends Model
 {
@@ -57,6 +59,7 @@ class Product extends Model
         $product->setPrice($dto->price);
         $product->setCurrency($dto->currency);
         $product->setAvailableCount($dto->availableCount);
+        $product->setDiscount($dto->discount);
 
         return $product;
     }
@@ -70,6 +73,7 @@ class Product extends Model
         $this->price = $dto->productDto->price;
         $this->currency = $dto->productDto->currency;
         $this->available_count = $dto->productDto->availableCount;
+        $this->discount = $dto->productDto->discount;
     }
 
     public function setName(string $name): void
@@ -105,6 +109,11 @@ class Product extends Model
     public function setSlug(string $name): void
     {
         $this->slug = Str::slug($name, '_');
+    }
+
+    public function setDiscount(string $discount): void
+    {
+        $this->discount = $discount;
     }
 
     public function category(): BelongsToMany
@@ -151,12 +160,12 @@ class Product extends Model
 
     public function searchableAs(): string
     {
-        return 'products_index';
+        return BaseConstans::PRODUCTS_INDEX;
     }
 
     public function toSearchableArray(): array
     {
-        $array = $this->only('name', 'short_description', 'description');
+        $array = $this->only(BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION, BaseConstans::PRICE);
 
         $related = $this->with(['category', 'option', 'media', 'rates'])
             ->where('id', $this->id)

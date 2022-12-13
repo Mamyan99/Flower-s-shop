@@ -2,6 +2,7 @@
 
 namespace App\Models\Option;
 
+use App\Models\BaseConstants\BaseConstans;
 use App\Models\Helpers\Uuid;
 use App\Models\Product\Product;
 use App\Services\Option\Dto\OptionDto;
@@ -85,14 +86,14 @@ class Option extends Model
 
     public function searchableAs(): string
     {
-        return 'option_index';
+        return BaseConstans::OPTIONS_INDEX;
     }
 
     public function toSearchableArray(): array
     {
         return Arr::only(
             $this->toArray(),
-            ['name', 'value', 'type']
+            [BaseConstans::NAME, BaseConstans::VALUE, BaseConstans::TYPE]
         );
     }
 }

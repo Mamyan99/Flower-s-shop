@@ -2,13 +2,13 @@
 
 namespace App\Models\Category;
 
+use App\Models\BaseConstants\BaseConstans;
 use App\Models\Helpers\Uuid;
 use App\Models\Product\Product;
 use App\Services\Category\Dto\CategoryDto;
 use App\Services\Category\Dto\UpdateCategoryDto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
@@ -89,7 +89,6 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id', 'id')->with('children');
     }
 
-
     public function product(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -102,14 +101,14 @@ class Category extends Model
 
     public function searchableAs(): string
     {
-        return 'category_index';
+        return BaseConstans::CATEGORIES_INDEX;
     }
 
     public function toSearchableArray(): array
     {
         return Arr::only(
             $this->toArray(),
-            ['name', 'short_description', 'description']
+            [BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION]
         );
     }
 }
