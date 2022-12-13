@@ -61,11 +61,6 @@ class Order extends Model
         return $order;
     }
 
-    public function updateStatus(string $status)
-    {
-        $this->status = $status;
-    }
-
     public function setCostumerUniqKey(string $costumerUniqKey): void
     {
         $this->costumer_uniq_key = $costumerUniqKey;

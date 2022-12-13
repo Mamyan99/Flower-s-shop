@@ -55,6 +55,20 @@ class ShopCartReadRepository implements ShopCartReadRepositoryInterface
         return $shopCart;
     }
 
+    public function getShopCartByCostumerUniqKey(string $costumerUniqKey, array $productIds): ShopCart
+    {
+        $shopCart = $this->query()
+            ->whereIn('product_id', $productIds)
+            ->where('costumer_uniq_key', $costumerUniqKey)
+            ->first();
+
+        if (is_null($shopCart)) {
+            throw new ShopCartDoesNotExistExecption();
+        }
+
+        return $shopCart;
+    }
+
     private function query(): Builder
     {
         return ShopCart::query();

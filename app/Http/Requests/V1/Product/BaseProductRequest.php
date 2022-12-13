@@ -15,6 +15,7 @@ class BaseProductRequest extends FormRequest
    const AVAILABLE_COUNT = 'available_count';
    const CATEGORIES_IDS = 'categories_ids';
    const OPTIONS_IDS = 'options_ids';
+   const DISCOUNT = 'discount';
 
     public function rules()
     {
@@ -36,11 +37,11 @@ class BaseProductRequest extends FormRequest
             ],
             self::PRICE => [
                 'numeric',
-                'nullable',
+                'required',
             ],
             self::CURRENCY => [
                 'string',
-                'nullable',
+                'required',
             ],
             self::AVAILABLE_COUNT => [
                 'int',
@@ -53,6 +54,10 @@ class BaseProductRequest extends FormRequest
                 'array',
                 'required',
             ],
+            self::DISCOUNT => [
+                'numeric',
+                'nullable',
+            ]
         ];
     }
 
@@ -99,5 +104,10 @@ class BaseProductRequest extends FormRequest
     public function getOptionsIds(): array
     {
         return $this->get(self::OPTIONS_IDS);
+    }
+
+    public function getDiscount(): float
+    {
+        return $this->get(self::DISCOUNT);
     }
 }

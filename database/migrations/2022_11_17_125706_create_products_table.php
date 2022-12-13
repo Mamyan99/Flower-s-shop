@@ -22,6 +22,8 @@ return new class extends Migration
             $table->float('price')->nullable();
             $table->string('currency')->nullable();
             $table->integer('available_count')->default(0);
+            $table->integer('bought_products_count')->default(0);
+            $table->float('discount')->nullable();
             $table->timestamps();
         });
     }

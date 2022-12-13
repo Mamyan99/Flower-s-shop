@@ -22,7 +22,6 @@ class CreateOrUpdateRateAction
         try {
             $rate = $this->rateReadRepository->getRate($dto);
             $rate->updateRate($dto);
-
         } catch(RateNotFoundException $e)
         {
             $rate = Rate::create($dto);

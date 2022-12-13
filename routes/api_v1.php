@@ -85,7 +85,7 @@ Route::prefix('shop-cart')
         Route::delete('/delete', [ShopCartController::class, 'delete']);
     });
 
-Route::prefix('order')
+Route::prefix('orders')
     ->group(function () {
         Route::post('/create', [OrderController::class, 'create']);
         Route::get('', [OrderController::class, 'index']);
