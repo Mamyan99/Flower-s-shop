@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\GetWebHookEvent;
+use App\Listener\ChangeOrderStatusListener;
 use App\Listener\ChangeProductBoughtCountListener;
 use App\Listener\ChangeShopCartBoughtListener;
 use Illuminate\Auth\Events\Registered;
@@ -21,8 +22,9 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         GetWebHookEvent::class => [
-           // ChangeShopCartBoughtListener::class,
+            ChangeShopCartBoughtListener::class,
             ChangeProductBoughtCountListener::class,
+            ChangeOrderStatusListener::class,
         ]
     ];
 
