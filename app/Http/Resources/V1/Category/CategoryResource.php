@@ -21,9 +21,9 @@ class CategoryResource extends JsonResource
             'parent_id' => $this->resource->parent_id,
             'name' => $this->resource->name,
             'slug' => $this->resource->slug,
-            'shortDescription' => $this->resource->short_description,
+            'short_description' => $this->resource->short_description,
             'description' => $this->resource->description,
-            'subCategories' => CategoryResource::collection($this->resource->children) ?? null
+            'sub_categories' => CategoryResource::collection($this->resource->children) ?? null
         ];
     }
 }

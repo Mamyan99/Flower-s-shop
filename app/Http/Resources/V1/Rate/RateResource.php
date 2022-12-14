@@ -15,8 +15,8 @@ class RateResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'productId' => $this->resource->product_id,
-            'costumerUniqKey' => $this->resource->costumer_uniq_key,
+            'product_id' => $this->resource->product_id,
+            'costumer_uniq_key' => $this->resource->costumer_uniq_key,
             'value' => $this->resource->value,
         ];
     }
