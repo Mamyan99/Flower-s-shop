@@ -2,34 +2,19 @@
 
 namespace App\Services\Order\Dto;
 
+use App\Http\Requests\V1\Option\CreateOptionRequest;
 use App\Http\Requests\V1\Order\CreateOrderRequest;
+use App\Services\Option\Dto\OptionDto;
+use Spatie\DataTransferObject\DataTransferObject;
 
-class CreateOrderDto
+class CreateOrderDto extends DataTransferObject
 {
-    public string $costumerUniqKey;
-    public array $shopCartIds;
-    public string $firstName;
-    public string $lastName;
-    public string $country;
-    public string $region;
-    public string $city;
-    public string $street;
-    public string $apartment;
-    public string $phone;
+    public OrderDto $orderDto;
 
     public static function fromRequest(CreateOrderRequest $request): self
     {
         return new self(
-            costumeruniqKey: $request->getCostumerUniqKey(),
-            shopCartIds: $request->getShopCartIds(),
-            firstName: $request->getFirstName(),
-            lastName: $request->getLastName(),
-            country: $request->getCountry(),
-            region: $request->getRegion(),
-            city: $request->getCity(),
-            street: $request->getStreet(),
-            apartment: $request->getApartment(),
-            phone: $request->getPhone(),
+            orderDto: OrderDto::fromRequest($request)
         );
     }
 }

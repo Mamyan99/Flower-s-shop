@@ -6,6 +6,7 @@ use App\Exceptions\DeleteErrorException;
 use App\Exceptions\SavingErrorException;
 use App\Models\Category\Category;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryWriteRepository implements CategoryWriteRepositoryInterface
 {
@@ -26,6 +27,15 @@ class CategoryWriteRepository implements CategoryWriteRepositoryInterface
         if(!$query->whereIn('id', $ids)->delete())
         {
             throw new DeleteErrorException;
+        }
+
+        return true;
+    }
+
+    public function insertSubCategories(array $subCategories): bool
+    {
+        if (!$this->query()->insert($subCategories)) {
+            throw new SavingErrorException();
         }
 
         return true;

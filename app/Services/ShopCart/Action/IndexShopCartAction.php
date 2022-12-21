@@ -14,8 +14,8 @@ class IndexShopCartAction
 
     public function run(IndexShopCartDto $dto): AnonymousResourceCollection
     {
-        $shopCart = $this->shopCartReadRepository->index($dto);
+        $shopCarts = $this->shopCartReadRepository->index($dto);
 
-        return ShopCartResource::collection($shopCart);
+        return ShopCartResource::collection($shopCarts);
     }
 }

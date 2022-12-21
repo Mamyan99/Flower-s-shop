@@ -12,7 +12,8 @@ class ProductReadRepository implements ProductReadRepositoryInterface
 {
     public function index(IndexProductDto $dto): LengthAwarePaginator
     {
-        return Product::search($dto->queryListDto->q)->when($dto->sortValue, function ($query) use ($dto) {
+        return Product::search($dto->queryListDto->q)
+            ->when($dto->sortValue, function ($query) use ($dto) {
             return $query->orderBy($dto->sortValue, $dto->sort);
         })->query(function (Builder $query) use ($dto) {
                 $this->filter($query, $dto);

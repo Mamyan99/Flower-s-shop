@@ -6,8 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-http": "*",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
+        "laravel-notification-channels/telegram": "^3.0",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",
@@ -15,8 +17,7 @@
         "laravel/tinker": "^2.7",
         "meilisearch/meilisearch-php": "^0.25.0",
         "spatie/data-transfer-object": "^3.9",
-        "spatie/laravel-medialibrary": "^9.6.0",
-      "ext-http": "*"
+        "spatie/laravel-medialibrary": "^9.6.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

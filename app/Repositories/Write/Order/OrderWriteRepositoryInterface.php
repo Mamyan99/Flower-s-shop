@@ -7,4 +7,6 @@ use App\Models\Order\Order;
 interface OrderWriteRepositoryInterface
 {
     public function save(Order $order): Order;
+    public function attachProducts(Order $order, array $products): void;
+    public function delete(array $ids): bool;
 }

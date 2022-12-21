@@ -9,17 +9,21 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductWriteRepository implements ProductWriteRepositoryInterface
 {
-    public function  save(Product $product, array $categoriesIds, array $optionsIds, array $mediaIds): Product
+    public function  save(Product $product): Product
     {
         if (!$product->save())
         {
             throw new SavingErrorException();
         }
+
+        return $product;
+    }
+
+    public function syncRelations(Product $product, array $categoriesIds, array $optionsIds, array $mediaIds): void
+    {
         $product->category()->sync($categoriesIds);
         $product->option()->sync($optionsIds);
         $product->media()->sync($mediaIds);
-
-        return $product;
     }
 
     public function delete(array $ids): bool

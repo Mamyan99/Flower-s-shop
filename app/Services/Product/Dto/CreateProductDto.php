@@ -16,3 +16,6 @@ class CreateProductDto extends DataTransferObject
         );
     }
 }
+
+
+

@@ -16,8 +16,11 @@ class ChangeShopCartBoughtListener
 
     public function handle(GetWebHookEvent $event): void
     {
-        $shopCart = $this->shopCartReadRepository->getShopCartByCostumerUniqKey($event->costumerUniqKey,$event->productIds);
-        $shopCart->updateBought(true);
-        $this->shopCartWriteRepository->save($shopCart);
+        $shopCarts = $this->shopCartReadRepository->getShopCarts($event->costumerUniqKey,$event->productIds);
+
+        foreach ($shopCarts as $shopCart) {
+            $shopCart->updateBought(true);
+            $this->shopCartWriteRepository->save($shopCart);
+        }
     }
 }

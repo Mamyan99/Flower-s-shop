@@ -16,7 +16,8 @@ class CreateProductAction
     {
         $product = Product::create($dto);
 
-        $this->productWriteRepository->save($product, $dto->categoriesIds, $dto->optionsIds, $dto->mediaIds);
+        $this->productWriteRepository->save($product);
+        $this->productWriteRepository->syncRelations($product, $dto->categoriesIds, $dto->optionsIds, $dto->mediaIds);
 
         return new ProductResource($product);
     }

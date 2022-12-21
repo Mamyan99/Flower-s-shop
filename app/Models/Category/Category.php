@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property string|null $parent_id
@@ -21,6 +23,7 @@ use Laravel\Scout\Searchable;
  * @property string $description
  * @property array|mixed|string|string[]|null $slug
  * @property string $short_description
+ * @property mixed $id
  */
 class Category extends Model
 {
@@ -97,6 +100,11 @@ class Category extends Model
             'category_id',
             'product_id'
         )->withPivot(['product_id', 'category_id']);
+    }
+
+    public function media(): MorphOne
+    {
+        return $this->morphOne(Media::class, 'category');
     }
 
     public function searchableAs(): string

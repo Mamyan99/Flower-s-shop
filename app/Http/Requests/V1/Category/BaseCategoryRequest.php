@@ -10,6 +10,7 @@ class BaseCategoryRequest extends FormRequest
     const NAME = 'name';
     const SHORT_DESCRIPTION = 'short_description';
     const DESCRIPTION = 'description';
+    const SUBCATEGORIES = 'sub_categories';
 
     public function rules()
     {
@@ -30,6 +31,10 @@ class BaseCategoryRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            self::SUBCATEGORIES => [
+                'array',
+                'nullable',
+            ]
         ];
     }
 
@@ -51,6 +56,11 @@ class BaseCategoryRequest extends FormRequest
     public function getDescription(): ?string
     {
         return $this->get(self::DESCRIPTION) ?? null;
+    }
+
+    public function getSubCategories(): ?array
+    {
+        return $this->get(self::SUBCATEGORIES) ?? null;
     }
 }
 

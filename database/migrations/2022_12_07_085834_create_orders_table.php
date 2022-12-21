@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('costumer_uniq_key')->index();
-            $table->string('status')->default('processing');
+            $table->string('status')->default('new');
             $table->float('total');
             $table->string('first_name');
             $table->string('last_name');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('street');
             $table->string('apartment');
             $table->string('phone');
+            $table->timestamp('delivery_date');
             $table->timestamps();
         });
     }
