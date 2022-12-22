@@ -6,10 +6,12 @@ use App\Models\Helpers\Uuid;
 use App\Models\Invoice\Invoice;
 use App\Models\Product\Product;
 use App\Services\Order\Dto\CreateOrderDto;
+use App\Services\Order\Dto\UpdateOrderDto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $costumer_uniq_key
@@ -23,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $street
  * @property string $apartment
  * @property string $phone
+ * @property string $delivery_date
  */
 class Order extends Model
 {
@@ -42,23 +45,40 @@ class Order extends Model
         'street',
         'apartment',
         'phone',
+        'delivery_date',
     ];
 
     public static function create(CreateOrderDto $dto): Order
     {
         $order = new static();
 
-        $order->setCostumerUniqKey($dto->costumerUniqKey);
-        $order->setFirstName($dto->firstName);
-        $order->setLastName($dto->lastName);
-        $order->setCountry($dto->country);
-        $order->setRegion($dto->region);
-        $order->setCity($dto->city);
-        $order->setStreet($dto->street);
-        $order->setApartment($dto->apartment);
-        $order->setPhone($dto->phone);
+        $order->setCostumerUniqKey($dto->orderDto->costumerUniqKey);
+        $order->setFirstName($dto->orderDto->firstName);
+        $order->setLastName($dto->orderDto->lastName);
+        $order->setCountry($dto->orderDto->country);
+        $order->setRegion($dto->orderDto->region);
+        $order->setCity($dto->orderDto->city);
+        $order->setStreet($dto->orderDto->street);
+        $order->setApartment($dto->orderDto->apartment);
+        $order->setPhone($dto->orderDto->phone);
+        $order->setDeliveryDate($dto->orderDto->deliveryDate);
 
         return $order;
+    }
+
+    public function updateOrder(UpdateOrderDto $dto): void
+    {
+        $this->costumer_uniq_key = $dto->orderDto->costumerUniqKey;
+        $this->status = $dto->status;
+        $this->first_name = $dto->orderDto->firstName;
+        $this->last_name = $dto->orderDto->lastName;
+        $this->country = $dto->orderDto->country;
+        $this->region = $dto->orderDto->region;
+        $this->city = $dto->orderDto->city;
+        $this->street = $dto->orderDto->street;
+        $this->apartment = $dto->orderDto->apartment;
+        $this->phone = $dto->orderDto->phone;
+        $this->delivery_date = $dto->orderDto->deliveryDate;
     }
 
     public function setCostumerUniqKey(string $costumerUniqKey): void
@@ -104,6 +124,12 @@ class Order extends Model
     public function setPhone(string $phone): void
     {
         $this->phone = $phone;
+    }
+
+    public function setDeliveryDate(string $deliveryDate): void
+    {
+        $deliveryDate = Carbon::parse($deliveryDate);
+        $this->delivery_date = $deliveryDate;
     }
 
     public function product(): BelongsToMany

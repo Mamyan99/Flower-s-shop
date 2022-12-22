@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\V1\OrderResource;
+namespace App\Http\Resources\V1\Order;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -20,8 +20,8 @@ class OrderResource extends JsonResource
             'costumer_uniq_key' => $this->resource->costumer_uniq_key,
             'status' => $this->resource->status,
             'total' => $this->resource->total,
-            'firstName' => $this->resource->firstName,
-            'lastName' => $this->resource->lastname,
+            'firstName' => $this->resource->first_name,
+            'lastName' => $this->resource->last_name,
             'country' => $this->resource->country,
             'region' => $this->resource->region,
             'city' => $this->resource->city,

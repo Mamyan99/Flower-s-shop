@@ -88,7 +88,7 @@ Route::prefix('shop-cart')
 Route::prefix('orders')
     ->group(function () {
         Route::post('/create', [OrderController::class, 'create']);
-        Route::get('', [OrderController::class, 'index']);
-        Route::delete('/delete', [OrderController::class, 'delete']);
-        Route::put('/update', [OrderController::class, 'update']);
+        Route::get('', [OrderController::class, 'index'])->middleware(['auth:api', 'admin']);;
+        Route::delete('/delete', [OrderController::class, 'delete'])->middleware(['auth:api', 'admin']);;
+        Route::put('/update/{id}', [OrderController::class, 'update'])->middleware(['auth:api', 'admin']);;
     });
