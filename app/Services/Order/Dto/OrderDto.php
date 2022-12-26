@@ -11,13 +11,14 @@ class OrderDto extends DataTransferObject
     public array  $productIds;
     public string $firstName;
     public string $lastName;
-    public string $country;
-    public string $region;
-    public string $city;
-    public string $street;
-    public string $apartment;
+    public ?string $country;
+    public ?string $region;
+    public ?string $city;
+    public ?string $street;
+    public ?string $apartment;
     public string $phone;
     public string $deliveryDate;
+    public string $address;
 
     public static function fromRequest(BaseOrderRequest $request): self
     {
@@ -33,6 +34,7 @@ class OrderDto extends DataTransferObject
             apartment: $request->getApartment(),
             phone: $request->getPhone(),
             deliveryDate: $request->getDeliveryDate(),
+            address: $request->getAddress()
         );
     }
 }

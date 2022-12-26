@@ -12,9 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -25,11 +28,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $short_description
  * @property mixed $id
  */
-class Category extends Model
+class Category extends Model implements HasMedia
 {
     use HasFactory;
     use Uuid;
     use Searchable;
+    use InteractsWithMedia;
+
+    /**
+     * @var Category|mixed
+     */
 
     protected $fillable = [
         'id',
@@ -89,7 +97,7 @@ class Category extends Model
 
     public function children(): HasMany
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id')->with('children');
+        return $this->hasMany(Category::class, 'parent_id', 'id')->with('image');
     }
 
     public function product(): BelongsToMany
@@ -102,9 +110,8 @@ class Category extends Model
         )->withPivot(['product_id', 'category_id']);
     }
 
-    public function media(): MorphOne
-    {
-        return $this->morphOne(Media::class, 'category');
+    public function image(): morphToMany{
+        return $this->morphToMany(Media::class, 'category','category_media');
     }
 
     public function searchableAs(): string

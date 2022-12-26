@@ -42,6 +42,7 @@ class User extends Authenticatable implements HasMedia
     public static function staticCreate(CreateUserDto $dto): User
     {
         $user = new static();
+
         $user->setUserId();
         $user->setDisplayName($dto->displayName);
         $user->setUsername($dto->username);

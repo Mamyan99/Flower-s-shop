@@ -41,6 +41,11 @@ class CategoryWriteRepository implements CategoryWriteRepositoryInterface
         return true;
     }
 
+    public function syncRelations(Category $category, array $mediaIds): void
+    {
+        $category->image()->sync($mediaIds);
+    }
+
     private function query(): Builder
     {
         return Category::query();

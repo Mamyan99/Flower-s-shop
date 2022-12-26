@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property string $apartment
  * @property string $phone
  * @property string $delivery_date
+ * @property string $address
  */
 class Order extends Model
 {
@@ -46,6 +47,7 @@ class Order extends Model
         'apartment',
         'phone',
         'delivery_date',
+        'address',
     ];
 
     public static function create(CreateOrderDto $dto): Order
@@ -62,6 +64,7 @@ class Order extends Model
         $order->setApartment($dto->orderDto->apartment);
         $order->setPhone($dto->orderDto->phone);
         $order->setDeliveryDate($dto->orderDto->deliveryDate);
+        $order->setAddress($dto->orderDto->address);
 
         return $order;
     }
@@ -79,6 +82,7 @@ class Order extends Model
         $this->apartment = $dto->orderDto->apartment;
         $this->phone = $dto->orderDto->phone;
         $this->delivery_date = $dto->orderDto->deliveryDate;
+        $this->address = $dto->orderDto->address;
     }
 
     public function setCostumerUniqKey(string $costumerUniqKey): void
@@ -130,6 +134,11 @@ class Order extends Model
     {
         $deliveryDate = Carbon::parse($deliveryDate);
         $this->delivery_date = $deliveryDate;
+    }
+
+    public function setAddress(string $address): void
+    {
+        $this->address = $address;
     }
 
     public function product(): BelongsToMany

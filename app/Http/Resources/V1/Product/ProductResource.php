@@ -5,8 +5,6 @@ namespace App\Http\Resources\V1\Product;
 use App\Http\Resources\V1\Category\CategoryResource;
 use App\Http\Resources\V1\Media\MediaResource;
 use App\Http\Resources\V1\Option\OptionResource;
-use App\Http\Resources\V1\Rate\RateResource;
-use App\Models\ShopCart\ShopCart;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
