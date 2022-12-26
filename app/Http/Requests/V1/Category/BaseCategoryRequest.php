@@ -10,9 +10,10 @@ class BaseCategoryRequest extends FormRequest
     const NAME = 'name';
     const SHORT_DESCRIPTION = 'short_description';
     const DESCRIPTION = 'description';
-    const SUBCATEGORIES = 'sub_categories';
+    const SUB_CATEGORIES = 'sub_categories';
+    const FILE = 'file';
 
-    public function rules()
+    public function rules(): array
     {
         return [
             self::PARENT_ID => [
@@ -31,9 +32,13 @@ class BaseCategoryRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            self::SUBCATEGORIES => [
+            self::SUB_CATEGORIES => [
                 'array',
                 'nullable',
+            ],
+            self::FILE => [
+                'nullable',
+                'mimes:svg,png',
             ]
         ];
     }
@@ -58,9 +63,24 @@ class BaseCategoryRequest extends FormRequest
         return $this->get(self::DESCRIPTION) ?? null;
     }
 
-    public function getSubCategories(): ?array
+    public function getSubCategories(): array
     {
-        return $this->get(self::SUBCATEGORIES) ?? null;
+        return $this->all(self::SUB_CATEGORIES)[self::SUB_CATEGORIES] ?? [];
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->file(self::FILE)->getPathname() ?? null;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->file(self::FILE)->getFilename() ?? null;
+    }
+
+    public function getUserId(): string
+    {
+        return $this->user()->id;
     }
 }
 

@@ -13,9 +13,9 @@
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",
-        "laravel/scout": "^9.4",
+        "laravel/scout": "^9.6",
         "laravel/tinker": "^2.7",
-        "meilisearch/meilisearch-php": "^0.25.0",
+        "meilisearch/meilisearch-php": "^0.26.1",
         "spatie/data-transfer-object": "^3.9",
         "spatie/laravel-medialibrary": "^9.6.0"
     },

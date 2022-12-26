@@ -4,6 +4,7 @@ namespace App\Repositories\Write\Media;
 
 use App\Exceptions\DeleteErrorException;
 use App\Exceptions\SavingErrorException;
+use App\Models\Category\Category;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -28,6 +29,11 @@ class MediaWriteRepository implements MediaWriteRepositoryInterface
         }
 
         return true;
+    }
+
+    public function syncRelations(Media $media, Category $category): void
+    {
+        $media->model()->sync($category);
     }
 
     private function query(): Builder

@@ -14,7 +14,7 @@ class CategoryReadRepository implements CategoryReadRepositoryInterface
     {
         return Category::search($dto->queryListDto->q)
             ->query(function (Builder $query) {
-                $query->with('children');
+                $query->with(['children', 'image']);
         })->paginate(
                 $dto->queryListDto->perPage,
                 'page',

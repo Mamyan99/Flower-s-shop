@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1\Order;
 
 use App\Http\Controllers\Api\V1\Controller;
-use App\Http\Requests\V1\Order\BaseOrderRequest;
 use App\Http\Requests\V1\Order\CreateOrderRequest;
 use App\Http\Requests\V1\Order\DeleteOrderRequest;
 use App\Http\Requests\V1\Order\IndexOrderRequest;
@@ -14,7 +13,6 @@ use App\Services\Order\Action\DeleteOrderAction;
 use App\Services\Order\Action\IndexOrderAction;
 use App\Services\Order\Action\UpdateOrderAction;
 use App\Services\Order\Dto\CreateOrderDto;
-use App\Services\Order\Dto\OrderDto;
 use App\Services\Order\Dto\IndexOrderDto;
 use App\Services\Order\Dto\UpdateOrderDto;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

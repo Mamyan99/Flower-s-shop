@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d75527b12bf139a0f6c67a74c336fb47",
+    "content-hash": "ec0cc66a2e5074057213d27b93d97972",
     "packages": [
         {
             "name": "brick/math",
@@ -1636,16 +1636,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v9.4.12",
+            "version": "v9.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "83f0027f37dd950d50efe4ecfc84a6eb4a476e15"
+                "reference": "7c4d294bd2dbed781515fd9a4747fd0133e687c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/83f0027f37dd950d50efe4ecfc84a6eb4a476e15",
-                "reference": "83f0027f37dd950d50efe4ecfc84a6eb4a476e15",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/7c4d294bd2dbed781515fd9a4747fd0133e687c9",
+                "reference": "7c4d294bd2dbed781515fd9a4747fd0133e687c9",
                 "shasum": ""
             },
             "require": {
@@ -1704,7 +1704,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2022-10-04T14:18:55+00:00"
+            "time": "2022-12-21T11:34:25+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2757,16 +2757,16 @@
         },
         {
             "name": "meilisearch/meilisearch-php",
-            "version": "v0.25.0",
+            "version": "v0.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/meilisearch/meilisearch-php.git",
-                "reference": "95148ea251d4d8117c68d2faf22dc3ef2f1d6dc5"
+                "reference": "05db1b22821dc34a9b71cfbe78189ec4abe600ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/95148ea251d4d8117c68d2faf22dc3ef2f1d6dc5",
-                "reference": "95148ea251d4d8117c68d2faf22dc3ef2f1d6dc5",
+                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/05db1b22821dc34a9b71cfbe78189ec4abe600ce",
+                "reference": "05db1b22821dc34a9b71cfbe78189ec4abe600ce",
                 "shasum": ""
             },
             "require": {
@@ -2781,7 +2781,7 @@
                 "guzzlehttp/guzzle": "^7.1",
                 "http-interop/http-factory-guzzle": "^1.0",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan": "1.9.3",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
@@ -2794,7 +2794,8 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "MeiliSearch\\": "src/"
+                    "MeiliSearch\\": "src/",
+                    "Meilisearch\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2818,9 +2819,9 @@
             ],
             "support": {
                 "issues": "https://github.com/meilisearch/meilisearch-php/issues",
-                "source": "https://github.com/meilisearch/meilisearch-php/tree/v0.25.0"
+                "source": "https://github.com/meilisearch/meilisearch-php/tree/v0.26.1"
             },
-            "time": "2022-10-03T14:09:17+00:00"
+            "time": "2022-12-16T17:11:53+00:00"
         },
         {
             "name": "monolog/monolog",

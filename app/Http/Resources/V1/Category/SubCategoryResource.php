@@ -13,19 +13,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property array|mixed|string|string[]|null $slug
  */
 
-class CategoryResource extends JsonResource
+class SubCategoryResource extends JsonResource
 {
     public function toArray($request): array
     {
         return [
             'id' => $this->resource->id,
-            'parent_id' => $this->resource->parent_id,
             'name' => $this->resource->name,
             'slug' => $this->resource->slug,
             'short_description' => $this->resource->short_description,
             'description' => $this->resource->description,
-            'sub_categories' => SubCategoryResource::collection($this->whenLoaded('children')),
-            'media' => MediaResource::collection($this->whenLoaded('image')),
+            'media' => MediaResource::collection($this->whenLoaded('image'))
         ];
     }
 }

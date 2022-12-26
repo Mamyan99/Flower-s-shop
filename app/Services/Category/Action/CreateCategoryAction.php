@@ -4,35 +4,51 @@ namespace App\Services\Category\Action;
 
 use App\Http\Resources\V1\Category\CategoryResource;
 use App\Models\Category\Category;
-use App\Models\Helpers\Uuid;
 use App\Repositories\Write\Category\CategoryWriteRepositoryInterface;
-use App\Services\Category\Dto\CategoryDto;
+use App\Services\Category\Dto\CreateCategoryDto;
+use App\Services\Media\UseCase\UploadMediaUseCase;
 
 class CreateCategoryAction
 {
-    public function __construct(protected CategoryWriteRepositoryInterface $categoryWriteRepository)
+    public function __construct(
+        protected CategoryWriteRepositoryInterface $categoryWriteRepository,
+        protected UploadMediaUseCase $uploadMediaUseCase,
+    )
     {}
-    public function run(CategoryDto $dto): CategoryResource
+    public function run(CreateCategoryDto $dto): CategoryResource
     {
-        $category = Category::create($dto);
+        $category = Category::create($dto->categoryDto);
         $category = $this->categoryWriteRepository->save($category);
-        $subCategories = $dto->subCategories;
-        $subCategoriesArray = [];
+
+        if($dto->categoryDto->fileName && $dto->categoryDto->filePath) {
+           $media = $this->uploadMediaUseCase->run($dto->categoryDto->userId, $dto->categoryDto->filePath, $dto->categoryDto->fileName, $dto->categoryDto->name);
+           $this->categoryWriteRepository->syncRelations($category, [$media->id]);
+        }
+
+        $subCategories = $dto->categoryDto->subCategories;
+        $categoryId = $category->id;
 
         foreach ($subCategories as $subCategory) {
-            $sub = [
-                'id' => Uuid::generate(),
-                'parent_id' => $category->id,
-                'name'=> $subCategory->name,
-                'short_description' => $subCategory->shortDescription,
-                'description' => $subCategory->description
-            ];
-
-            $subCategoriesArray[] = $sub;
+            $this->createSubCategories($categoryId, $subCategory);
         }
-        //dd($subCategoriesArray);
-        $this->categoryWriteRepository->insertSubCategories($subCategoriesArray);
 
         return new CategoryResource($category);
+    }
+
+    private function createSubCategories(string $categoryId, $subCategory): void
+    {
+        $category = Category::create($subCategory);
+        $category->parent_id = $categoryId;
+        $category = $this->categoryWriteRepository->save($category);
+
+        if($subCategory->fileName && $subCategory->filePath) {
+            $media = $this->uploadMediaUseCase->run(
+                $subCategory->userId,
+                $subCategory->filePath,
+                $subCategory->fileName,
+                $subCategory->name
+            );
+            $this->categoryWriteRepository->syncRelations($category, [$media->id]);
+        }
     }
 }

@@ -17,6 +17,7 @@ class BaseOrderRequest extends FormRequest
     const APARTMENT = 'apartment';
     const PHONE = 'phone';
     const DELIVERY_DATE = 'delivery_date';
+    const ADDRESS = 'address';
 
     public function rules()
     {
@@ -39,23 +40,23 @@ class BaseOrderRequest extends FormRequest
             ],
             self::COUNTRY => [
                 'string',
-                'required',
+                'nullable',
             ],
             self::CITY => [
                 'string',
-                'required',
+                'nullable',
             ],
             self::REGION => [
                 'string',
-                'required',
+                'nullable',
             ],
             self::STREET => [
                 'string',
-                'required',
+                'nullable',
             ],
             self::APARTMENT => [
                 'string',
-                'required',
+                'nullable',
             ],
             self::PHONE => [
                 'string',
@@ -65,6 +66,10 @@ class BaseOrderRequest extends FormRequest
                 'string',
                 'required',
             ],
+            self::ADDRESS => [
+                'string',
+                'required',
+            ]
         ];
     }
 
@@ -88,29 +93,29 @@ class BaseOrderRequest extends FormRequest
         return $this->get(self::LAST_NAME);
     }
 
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
-        return $this->get(self::COUNTRY);
+        return $this->get(self::COUNTRY) ?? null;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
-        return $this->get(self::CITY);
+        return $this->get(self::CITY) ?? null;
     }
 
-    public function getRegion(): string
+    public function getRegion(): ?string
     {
-        return $this->get(self::REGION);
+        return $this->get(self::REGION) ?? null;
     }
 
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
-        return $this->get(self::STREET);
+        return $this->get(self::STREET) ?? null;
     }
 
-    public function getApartment(): string
+    public function getApartment(): ?string
     {
-        return $this->get(self::APARTMENT);
+        return $this->get(self::APARTMENT) ?? null;
     }
 
     public function getPhone(): string
@@ -121,5 +126,10 @@ class BaseOrderRequest extends FormRequest
     public function getDeliveryDate(): string
     {
         return $this->get(self::DELIVERY_DATE);
+    }
+
+    public function getAddress(): string
+    {
+        return $this->get(self::ADDRESS);
     }
 }
