@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Option\CategoryMedia;
+namespace App\Models\CategoryMedia;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -80,12 +80,12 @@ class Category extends Model implements HasMedia
         $this->name = $name;
     }
 
-    public function setShortDescription(string|null $shortDescription): void
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->short_description = $shortDescription;
     }
 
-    public function setDescription(string|null $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
