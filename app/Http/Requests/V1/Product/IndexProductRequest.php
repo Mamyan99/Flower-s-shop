@@ -7,7 +7,8 @@ use App\Http\Requests\V1\QueryList\QueryListRequest;
 class IndexProductRequest extends QueryListRequest
 {
     const CATEGORIES_IDS  = 'categories_ids';
-    const OPTIONS_IDS = 'options_ids';
+    const COLOR_IDS = 'color_ids';
+    const SIZE_IDS = 'size_ids';
     const MIN_VALUE = 'min';
     const MAX_VALUE = 'max';
     const FILTER_VALUE = 'filter_value';
@@ -22,7 +23,11 @@ class IndexProductRequest extends QueryListRequest
                 'array',
                 'nullable',
             ],
-            self::OPTIONS_IDS => [
+            self::COLOR_IDS => [
+                'array',
+                'nullable',
+            ],
+            self::SIZE_IDS => [
                 'array',
                 'nullable',
             ],
@@ -55,9 +60,14 @@ class IndexProductRequest extends QueryListRequest
         return $this->get(self::CATEGORIES_IDS) ?? null;
     }
 
-    public function getOptionsIds(): ?array
+    public function getColorIds(): ?array
     {
-        return $this->get(self::OPTIONS_IDS) ?? null;
+        return $this->get(self::COLOR_IDS) ?? null;
+    }
+
+    public function getSizeIds(): ?array
+    {
+        return $this->get(self::SIZE_IDS) ?? null;
     }
 
     public function getMin(): ?int

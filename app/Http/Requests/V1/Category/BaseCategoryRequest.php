@@ -38,7 +38,7 @@ class BaseCategoryRequest extends FormRequest
             ],
             self::FILE => [
                 'nullable',
-                'mimes:svg,png',
+                'mimes:svg,png,jpeg',
             ]
         ];
     }
@@ -70,12 +70,12 @@ class BaseCategoryRequest extends FormRequest
 
     public function getFilePath(): ?string
     {
-        return $this->file(self::FILE)->getPathname() ?? null;
+        return $this->file(self::FILE) ? $this->file(self::FILE)->getPathname() : null;
     }
 
     public function getFileName(): ?string
     {
-        return $this->file(self::FILE)->getFilename() ?? null;
+        return $this->file(self::FILE) ? $this->file(self::FILE)->getFilename() : null;
     }
 
     public function getUserId(): string

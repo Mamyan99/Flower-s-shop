@@ -10,11 +10,10 @@ class BaseProductRequest extends FormRequest
    const MEDIA_IDS = 'media_ids';
    const SHORT_DESCRIPTION = 'short_description';
    const DESCRIPTION = 'description';
-   const PRICE = 'price';
-   const CURRENCY = 'currency';
    const AVAILABLE_COUNT = 'available_count';
    const CATEGORIES_IDS = 'categories_ids';
-   const OPTIONS_IDS = 'options_ids';
+   const COLORS_IDS = 'colors_ids';
+   const SIZES = 'sizes';
    const DISCOUNT = 'discount';
 
     public function rules()
@@ -35,14 +34,6 @@ class BaseProductRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            self::PRICE => [
-                'numeric',
-                'required',
-            ],
-            self::CURRENCY => [
-                'string',
-                'required',
-            ],
             self::AVAILABLE_COUNT => [
                 'int',
             ],
@@ -50,7 +41,11 @@ class BaseProductRequest extends FormRequest
                 'array',
                 'required',
             ],
-            self::OPTIONS_IDS => [
+            self::COLORS_IDS => [
+                'array',
+                'required',
+            ],
+            self::SIZES => [
                 'array',
                 'required',
             ],
@@ -81,16 +76,6 @@ class BaseProductRequest extends FormRequest
         return $this->get(self::DESCRIPTION) ?? null;
     }
 
-    public function getPrice(): ?float
-    {
-        return $this->get(self::PRICE) ?? null;
-    }
-
-    public function getCurrency(): ?string
-    {
-        return $this->get(self::CURRENCY) ?? null;
-    }
-
     public function getAvailableCount(): int
     {
         return $this->get(self::AVAILABLE_COUNT) ?? 0;
@@ -101,9 +86,14 @@ class BaseProductRequest extends FormRequest
         return $this->get(self::CATEGORIES_IDS);
     }
 
-    public function getOptionsIds(): array
+    public function getColorIds(): array
     {
-        return $this->get(self::OPTIONS_IDS);
+        return $this->get(self::COLORS_IDS);
+    }
+
+    public function getSize(): array
+    {
+        return $this->get(self::SIZES);
     }
 
     public function getDiscount(): float

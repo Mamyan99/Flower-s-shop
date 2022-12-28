@@ -35,7 +35,7 @@ class CreateOrderAction
         $order->total = $total;
 
         $order = $this->orderWriteRepository->save($order);
-        $this->orderWriteRepository->attachProducts($order, $products);
+        $this->orderWriteRepository->syncProducts($order, $products);
 
         return new OrderResource($order);
     }

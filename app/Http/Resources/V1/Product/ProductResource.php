@@ -5,6 +5,8 @@ namespace App\Http\Resources\V1\Product;
 use App\Http\Resources\V1\Category\CategoryResource;
 use App\Http\Resources\V1\Media\MediaResource;
 use App\Http\Resources\V1\Option\OptionResource;
+use App\Http\Resources\V1\Options\ColorResource;
+use App\Http\Resources\V1\Options\SizeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -31,17 +33,16 @@ class ProductResource extends JsonResource
             'slug' => $this->resource->slug,
             'short_description' => $this->resource->short_description,
             'description' => $this->resource->description,
-            'price' => $this->resource->price,
-            'currency' => $this->resource->currency,
             'available_count' => $this->resource->available_count,
             'bought_products_count' => $this->resource->bought_products_count,
-            'discount' => $this->resource->discount,
-            'discountedPrice' => $this->getDiscountedPrice(),
+//            'discount' => $this->resource->discount,
+//            'discountedPrice' => $this->getDiscountedPrice(),
             'rates_average_count' => $this->resource->rates_avg_value,
             'rates_count' => $this->resource->rates_count,
             'created_at' => $this->resource->created_at,
             'categories' => CategoryResource::collection($this->whenLoaded('category')),
-            'options' => OptionResource::collection($this->whenLoaded('option')),
+            'color' => ColorResource::collection($this->whenLoaded('color')),
+            'size' => SizeResource::collection($this->whenLoaded('size')),
             'media' => MediaResource::collection($this->whenLoaded('media')),
         ];
     }

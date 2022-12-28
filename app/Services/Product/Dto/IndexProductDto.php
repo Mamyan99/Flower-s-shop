@@ -9,7 +9,8 @@ use Spatie\DataTransferObject\DataTransferObject;
 class IndexProductDto extends DataTransferObject
 {
     public ?array $categoriesIds;
-    public ?array $optionsIds;
+    public ?array $colorIds;
+    public ?array $sizeIds;
     public ?int $minValue;
     public ?int $maxValue;
     public ?string $sort;
@@ -21,7 +22,8 @@ class IndexProductDto extends DataTransferObject
     {
         return new self(
             categoriesIds: $request->getCategoriesIds(),
-            optionsIds: $request->getOptionsIds(),
+            colorIds: $request->getColorIds(),
+            sizeIds:  $request->getSizeIds(),
             minValue: $request->getMin(),
             maxValue: $request->getMax(),
             filterValue: $request->getFilterValue(),

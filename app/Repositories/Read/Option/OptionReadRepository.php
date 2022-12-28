@@ -4,6 +4,7 @@ namespace App\Repositories\Read\Option;
 
 use App\Exceptions\OptionDoesNotExistException;
 use App\Models\Option\Option;
+use App\Services\Option\Dto\IndexColorDto;
 use App\Services\Option\Dto\IndexOptionDto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;

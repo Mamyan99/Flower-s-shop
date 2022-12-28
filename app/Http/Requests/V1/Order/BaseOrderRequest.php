@@ -11,10 +11,10 @@ class BaseOrderRequest extends FormRequest
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const COUNTRY = 'country';
-    const CITY = 'city';
-    const REGION = 'region';
-    const STREET = 'street';
-    const APARTMENT = 'apartment';
+//    const CITY = 'city';
+//    const REGION = 'region';
+//    const STREET = 'street';
+//    const APARTMENT = 'apartment';
     const PHONE = 'phone';
     const DELIVERY_DATE = 'delivery_date';
     const ADDRESS = 'address';
@@ -42,22 +42,22 @@ class BaseOrderRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            self::CITY => [
-                'string',
-                'nullable',
-            ],
-            self::REGION => [
-                'string',
-                'nullable',
-            ],
-            self::STREET => [
-                'string',
-                'nullable',
-            ],
-            self::APARTMENT => [
-                'string',
-                'nullable',
-            ],
+//            self::CITY => [
+//                'string',
+//                'nullable',
+//            ],
+//            self::REGION => [
+//                'string',
+//                'nullable',
+//            ],
+//            self::STREET => [
+//                'string',
+//                'nullable',
+//            ],
+//            self::APARTMENT => [
+//                'string',
+//                'nullable',
+//            ],
             self::PHONE => [
                 'string',
                 'required',
@@ -93,30 +93,30 @@ class BaseOrderRequest extends FormRequest
         return $this->get(self::LAST_NAME);
     }
 
-    public function getCountry(): ?string
-    {
-        return $this->get(self::COUNTRY) ?? null;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->get(self::CITY) ?? null;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->get(self::REGION) ?? null;
-    }
-
-    public function getStreet(): ?string
-    {
-        return $this->get(self::STREET) ?? null;
-    }
-
-    public function getApartment(): ?string
-    {
-        return $this->get(self::APARTMENT) ?? null;
-    }
+//    public function getCountry(): ?string
+//    {
+//        return $this->get(self::COUNTRY) ?? null;
+//    }
+//
+//    public function getCity(): ?string
+//    {
+//        return $this->get(self::CITY) ?? null;
+//    }
+//
+//    public function getRegion(): ?string
+//    {
+//        return $this->get(self::REGION) ?? null;
+//    }
+//
+//    public function getStreet(): ?string
+//    {
+//        return $this->get(self::STREET) ?? null;
+//    }
+//
+//    public function getApartment(): ?string
+//    {
+//        return $this->get(self::APARTMENT) ?? null;
+//    }
 
     public function getPhone(): string
     {

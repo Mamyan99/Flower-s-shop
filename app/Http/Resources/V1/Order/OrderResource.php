@@ -12,7 +12,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         return [
@@ -22,12 +21,14 @@ class OrderResource extends JsonResource
             'total' => $this->resource->total,
             'firstName' => $this->resource->first_name,
             'lastName' => $this->resource->last_name,
-            'country' => $this->resource->country,
-            'region' => $this->resource->region,
-            'city' => $this->resource->city,
-            'street' => $this->resource->street,
-            'apartment' => $this->resource->apartment,
+//            'country' => $this->resource->country,
+//            'region' => $this->resource->region,
+//            'city' => $this->resource->city,
+//            'street' => $this->resource->street,
+//            'apartment' => $this->resource->apartment,
+            'address' => $this->resource->address,
             'phone' => $this->resource->phone,
+            //'order_product_count' => $this->resource->pivot->order_product_count,
         ];
     }
 }

@@ -9,6 +9,7 @@ class RegisterRequest extends FormRequest
     const DISPLAY_NAME = 'display_name';
     const USERNAME = 'username';
     const PASSWORD = 'password';
+    const ROLE = 'role';
 
     public function rules()
     {
@@ -30,6 +31,11 @@ class RegisterRequest extends FormRequest
                 'required',
                 'min:6',
             ],
+            self::ROLE => [
+                'string',
+                'in:admin,user',
+                'nullable',
+            ]
         ];
     }
 
@@ -46,5 +52,10 @@ class RegisterRequest extends FormRequest
     public function getPassword(): string
     {
         return $this->get(self::PASSWORD);
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->get(self::ROLE) ?? 'user';
     }
 }

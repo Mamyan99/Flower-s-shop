@@ -10,9 +10,9 @@ use App\Http\Requests\V1\Option\UpdateOptionRequest;
 use App\Http\Resources\V1\Option\OptionResource;
 use App\Services\Option\Action\CreateOptionAction;
 use App\Services\Option\Action\DeleteOptionAction;
-use App\Services\Option\Action\IndexOptionAction;
+use App\Services\Option\Action\IndexColorAction;
 use App\Services\Option\Action\UpdateOptionAction;
-use App\Services\Option\Dto\IndexOptionDto;
+use App\Services\Option\Dto\IndexColorDto;
 use App\Services\Option\Dto\OptionDto;
 use App\Services\Option\Dto\UpdateOptionDto;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -24,12 +24,12 @@ class OptionController extends Controller
         protected CreateOptionAction $createOptionAction,
         protected DeleteOptionAction $deleteOptionAction,
         protected UpdateOptionAction $updateOptionAction,
-        protected IndexOptionAction  $indexOptionAction
+        protected IndexColorAction  $indexOptionAction
     ) {}
 
     public function index(IndexOptionRequest $request): AnonymousResourceCollection
     {
-        $dto = IndexOptionDto::fromRequest($request);
+        $dto = IndexColorDto::fromRequest($request);
 
         return $this->indexOptionAction->run($dto);
     }

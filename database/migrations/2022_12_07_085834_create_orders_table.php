@@ -20,11 +20,12 @@ return new class extends Migration
             $table->float('total');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('country');
-            $table->string('region');
-            $table->string('city');
-            $table->string('street');
-            $table->string('apartment');
+//            $table->string('country');
+//            $table->string('region');
+//            $table->string('city');
+//            $table->string('street');
+//            $table->string('apartment');
+            $table->string('address');
             $table->string('phone');
             $table->timestamp('delivery_date');
             $table->timestamps();

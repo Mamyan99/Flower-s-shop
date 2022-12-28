@@ -11,11 +11,10 @@ class ProductDto extends DataTransferObject
     public array $mediaIds;
     public ?string $shortDescription;
     public ?string $description;
-    public ?float $price;
-    public ?string $currency;
     public int $availableCount;
     public array $categoriesIds;
-    public array $optionsIds;
+    public array $colorsIds;
+    public array $sizes;
     public float $discount;
 
     public static function fromRequest(BaseProductRequest $request): self
@@ -25,11 +24,10 @@ class ProductDto extends DataTransferObject
             mediaIds: $request->getMediaIds(),
             shortDescription: $request->getShortDescription(),
             description: $request->getDescription(),
-            price: $request->getPrice(),
-            currency: $request->getCurrency(),
             availableCount: $request->getAvailableCount(),
             categoriesIds: $request->getCategoriesIds(),
-            optionsIds: $request->getOptionsIds(),
+            colorsIds: $request->getColorIds(),
+            sizes: $request->getSize(),
             discount: $request->getDiscount(),
         );
     }

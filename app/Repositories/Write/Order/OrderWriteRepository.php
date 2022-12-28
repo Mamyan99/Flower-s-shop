@@ -19,9 +19,9 @@ class OrderWriteRepository implements OrderWriteRepositoryInterface
         return $order;
     }
 
-    public function attachProducts(Order $order, array $products): void
+    public function syncProducts(Order $order, array $products): void
     {
-        $order->product()->attach($products);
+        $order->product()->sync($products);
     }
 
     public function delete(array $ids): bool
