@@ -57,12 +57,16 @@ class ProductReadRepository implements ProductReadRepositoryInterface
                 $query->whereHas('category', function ($q) use ($dto) {
                     return $q->whereIn('category_id', $dto->categoriesIds);
                 });
-        })->when($dto->optionsIds, function ($query) use ($dto) {
-                $query->whereHas('option', function ($q) use ($dto) {
-                    return $q->whereIn('option_id', $dto->optionsIds);
+        })->when($dto->colorIds, function ($query) use ($dto) {
+                $query->whereHas('color', function ($q) use ($dto) {
+                    return $q->whereIn('color_id', $dto->colorIds);
                 });
-        })->withAvg(relation: 'rates', column: 'value')
-            ->with(['category', 'option', 'media'])
+        })->when($dto->sizeIds, function ($query) use ($dto) {
+                $query->whereHas('size', function ($q) use ($dto) {
+                    return $q->whereIn('size_id', $dto->sizeIds);
+                });
+        }) ->withAvg(relation: 'rates', column: 'value')
+            ->with(['category', 'color', 'size', 'media'])
             ->withCount('rates');
     }
 }

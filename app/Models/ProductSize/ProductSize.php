@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\CategoryMedia;
+namespace App\Models\ProductSize;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class CategoryMedia extends Model
+class ProductSize extends Model
 {
     use HasFactory;
     use Searchable;
 
-    protected $table = 'category_media';
+    protected $table = 'product_color';
 }

@@ -15,6 +15,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $username
  * @property string|null $display_name
  * @property string $password
+ * @property string|null $role
  */
 class User extends Authenticatable implements HasMedia
 {
@@ -28,6 +29,7 @@ class User extends Authenticatable implements HasMedia
         'display_name',
         'username',
         'password',
+        'role',
     ];
 
     protected $hidden = [
@@ -47,6 +49,7 @@ class User extends Authenticatable implements HasMedia
         $user->setDisplayName($dto->displayName);
         $user->setUsername($dto->username);
         $user->setPassword($dto->password);
+        $user->setRole($dto->role);
 
         return $user;
     }
@@ -69,5 +72,10 @@ class User extends Authenticatable implements HasMedia
     public function setPassword(string $password): void
     {
         $this->password = bcrypt($password);
+    }
+
+    public function setRole(?string $role): void
+    {
+        $this->role = $role;
     }
 }

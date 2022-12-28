@@ -3,6 +3,7 @@
 namespace App\Repositories\Read\Option;
 
 use App\Models\Option\Option;
+use App\Services\Option\Dto\IndexColorDto;
 use App\Services\Option\Dto\IndexOptionDto;
 use Illuminate\Pagination\LengthAwarePaginator;
 

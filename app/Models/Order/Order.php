@@ -57,11 +57,11 @@ class Order extends Model
         $order->setCostumerUniqKey($dto->orderDto->costumerUniqKey);
         $order->setFirstName($dto->orderDto->firstName);
         $order->setLastName($dto->orderDto->lastName);
-        $order->setCountry($dto->orderDto->country);
-        $order->setRegion($dto->orderDto->region);
-        $order->setCity($dto->orderDto->city);
-        $order->setStreet($dto->orderDto->street);
-        $order->setApartment($dto->orderDto->apartment);
+//        $order->setCountry($dto->orderDto->country);
+//        $order->setRegion($dto->orderDto->region);
+//        $order->setCity($dto->orderDto->city);
+//        $order->setStreet($dto->orderDto->street);
+//        $order->setApartment($dto->orderDto->apartment);
         $order->setPhone($dto->orderDto->phone);
         $order->setDeliveryDate($dto->orderDto->deliveryDate);
         $order->setAddress($dto->orderDto->address);
@@ -75,11 +75,11 @@ class Order extends Model
         $this->status = $dto->status;
         $this->first_name = $dto->orderDto->firstName;
         $this->last_name = $dto->orderDto->lastName;
-        $this->country = $dto->orderDto->country;
-        $this->region = $dto->orderDto->region;
-        $this->city = $dto->orderDto->city;
-        $this->street = $dto->orderDto->street;
-        $this->apartment = $dto->orderDto->apartment;
+//        $this->country = $dto->orderDto->country;
+//        $this->region = $dto->orderDto->region;
+//        $this->city = $dto->orderDto->city;
+//        $this->street = $dto->orderDto->street;
+//        $this->apartment = $dto->orderDto->apartment;
         $this->phone = $dto->orderDto->phone;
         $this->delivery_date = $dto->orderDto->deliveryDate;
         $this->address = $dto->orderDto->address;
@@ -100,30 +100,30 @@ class Order extends Model
         $this->last_name = $lastName;
     }
 
-    public function setCountry(string $country): void
-    {
-        $this->country = $country;
-    }
-
-    public function setRegion(string $region): void
-    {
-        $this->region = $region;
-    }
-
-    public function setCity(string $city): void
-    {
-        $this->city = $city;
-    }
-
-    public function setStreet(string $street): void
-    {
-        $this->street = $street;
-    }
-
-    public function setApartment(string $apartment): void
-    {
-        $this->apartment = $apartment;
-    }
+//    public function setCountry(?string $country): void
+//    {
+//        $this->country = $country;
+//    }
+//
+//    public function setRegion(?string $region): void
+//    {
+//        $this->region = $region;
+//    }
+//
+//    public function setCity(?string $city): void
+//    {
+//        $this->city = $city;
+//    }
+//
+//    public function setStreet(?string $street): void
+//    {
+//        $this->street = $street;
+//    }
+//
+//    public function setApartment(?string $apartment): void
+//    {
+//        $this->apartment = $apartment;
+//    }
 
     public function setPhone(string $phone): void
     {
@@ -148,7 +148,7 @@ class Order extends Model
             'product_order',
             'order_id',
             'product_id'
-        )->withPivot(['product_id', 'order_id']);
+        )->withPivot(['product_id', 'order_id', 'order_product_count']);
     }
 
     public function invoice(): BelongsTo

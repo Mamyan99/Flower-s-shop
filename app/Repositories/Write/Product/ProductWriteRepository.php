@@ -19,11 +19,12 @@ class ProductWriteRepository implements ProductWriteRepositoryInterface
         return $product;
     }
 
-    public function syncRelations(Product $product, array $categoriesIds, array $optionsIds, array $mediaIds): void
+    public function syncRelations(Product $product, array $categoriesIds, array $colorsIds, array $sizes, array $mediaIds): void
     {
         $product->category()->sync($categoriesIds);
-        $product->option()->sync($optionsIds);
+        $product->color()->sync($colorsIds);
         $product->media()->sync($mediaIds);
+        $product->size()->sync($sizes);
     }
 
     public function delete(array $ids): bool

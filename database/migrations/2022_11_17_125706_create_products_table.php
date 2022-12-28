@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('slug');
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
-            $table->float('price')->nullable();
-            $table->string('currency')->nullable();
             $table->integer('available_count')->default(0);
             $table->integer('bought_products_count')->default(0);
             $table->float('discount')->nullable();

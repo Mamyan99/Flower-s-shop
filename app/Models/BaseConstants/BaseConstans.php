@@ -15,4 +15,7 @@ class BaseConstans
     const PRODUCTS_INDEX = 'products_index';
     const OPTIONS_INDEX = 'options_index';
     const CATEGORIES_INDEX = 'categories_index';
+    const COLORS_INDEX  = 'colors_index';
+    const SIZE_INDEX  = 'size_index';
+    const UNIT_OF_MEASUREMENT = 'unit_of_measurement';
 }

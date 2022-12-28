@@ -8,6 +8,10 @@ use App\Repositories\Read\Media\MediaReadRepository;
 use App\Repositories\Read\Media\MediaReadRepositoryInterface;
 use App\Repositories\Read\Option\OptionReadRepository;
 use App\Repositories\Read\Option\OptionReadRepositoryInterface;
+use App\Repositories\Read\Options\Color\ColorReadRepository;
+use App\Repositories\Read\Options\Color\ColorReadRepositoryInterface;
+use App\Repositories\Read\Options\Size\SizeReadRepository;
+use App\Repositories\Read\Options\Size\SizeReadRepositoryInterface;
 use App\Repositories\Read\Order\OrderReadRepository;
 use App\Repositories\Read\Order\OrderReadRepositoryInterface;
 use App\Repositories\Read\Product\ProductReadRepository;
@@ -103,6 +107,18 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(
             OrderReadRepositoryInterface::class,
             OrderReadRepository::class
+        );
+        $this->app->bind(
+            OrderReadRepositoryInterface::class,
+            OrderReadRepository::class
+        );
+        $this->app->bind(
+            ColorReadRepositoryInterface::class,
+            ColorReadRepository::class
+        );
+        $this->app->bind(
+            SizeReadRepositoryInterface::class,
+            SizeReadRepository::class
         );
     }
 }

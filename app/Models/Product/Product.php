@@ -6,9 +6,12 @@ use App\Models\BaseConstants\BaseConstans;
 use App\Models\Category\Category;
 use App\Models\Helpers\Uuid;
 use App\Models\Option\Option;
+use App\Models\Options\Color;
+use App\Models\Options\Size;
 use App\Models\Order\Order;
 use App\Models\Rate\Rate;
 use App\Models\ShopCart\ShopCart;
+use App\Services\Product\Dto\CreateProductDto;
 use App\Services\Product\Dto\ProductDto;
 use App\Services\Product\Dto\UpdateProductDto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,23 +46,19 @@ class Product extends Model
         'slug',
         'short_description',
         'description',
-        'price',
-        'currency',
         'available_count',
     ];
 
-    public static function create(ProductDto $dto): Product
+    public static function create(CreateProductDto $dto): Product
     {
         $product = new static();
 
-        $product->setName($dto->name);
-        $product->setSlug($dto->name);
-        $product->setShortDescription($dto->shortDescription);
-        $product->setDescription($dto->description);
-        $product->setPrice($dto->price);
-        $product->setCurrency($dto->currency);
-        $product->setAvailableCount($dto->availableCount);
-        $product->setDiscount($dto->discount);
+        $product->setName($dto->productDto->name);
+        $product->setSlug($dto->productDto->name);
+        $product->setShortDescription($dto->productDto->shortDescription);
+        $product->setDescription($dto->productDto->description);
+        $product->setAvailableCount($dto->productDto->availableCount);
+        $product->setDiscount($dto->productDto->discount);
 
         return $product;
     }
@@ -70,8 +69,6 @@ class Product extends Model
         $this->setSlug($dto->productDto->name);
         $this->short_description = $dto->productDto->shortDescription;
         $this->description = $dto->productDto->description;
-        $this->price = $dto->productDto->price;
-        $this->currency = $dto->productDto->currency;
         $this->available_count = $dto->productDto->availableCount;
         $this->discount = $dto->productDto->discount;
     }
@@ -89,16 +86,6 @@ class Product extends Model
     public function setDescription(string|null $description): void
     {
         $this->description = $description;
-    }
-
-    public function setPrice(float|null $price): void
-    {
-        $this->price = $price;
-    }
-
-    public function setCurrency(string $currency): void
-    {
-        $this->currency = $currency;
     }
 
     public function setAvailableCount(string $availableCount): void
@@ -123,7 +110,7 @@ class Product extends Model
             'product_categories',
             'product_id',
             'category_id',
-        )->withPivot(['category_id', 'product_id']);
+        )->withPivot(['category_id', 'product_id'])->with('children');
     }
 
     public function option(): BelongsToMany{
@@ -141,7 +128,7 @@ class Product extends Model
             'product_order',
             'product_id',
             'order_id',
-        )->withPivot(['order_id', 'product_id']);
+        )->withPivot(['order_id', 'product_id', 'order_product_count']);
     }
 
     public function rates(): HasMany
@@ -158,6 +145,24 @@ class Product extends Model
         return $this->morphToMany(Media::class, 'product','product_media');
     }
 
+    public function color(): BelongsToMany{
+        return $this->belongsToMany(
+            Color::class,
+            'product_color',
+            'product_id',
+            'color_id',
+        )->withPivot(['color_id', 'product_id']);
+    }
+
+    public function size(): BelongsToMany{
+        return $this->belongsToMany(
+            Size::class,
+            'product_size',
+            'product_id',
+            'size_id',
+        )->withPivot(['size_id', 'product_id', 'price', 'currency']);
+    }
+
     public function searchableAs(): string
     {
         return BaseConstans::PRODUCTS_INDEX;
@@ -167,7 +172,7 @@ class Product extends Model
     {
         $array = $this->only(BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION, BaseConstans::PRICE);
 
-        $related = $this->with(['category', 'option', 'media', 'rates'])
+        $related = $this->with(['category', 'color', 'size', 'media', 'rates'])
             ->where('id', $this->id)
             ->first()
             ->toArray();

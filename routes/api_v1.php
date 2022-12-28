@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Category\CategoryController;
 use App\Http\Controllers\Api\V1\Media\MediaController;
 use App\Http\Controllers\Api\V1\Option\OptionController;
+use App\Http\Controllers\Api\V1\Options\ColorController;
+use App\Http\Controllers\Api\V1\Options\SizeController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use App\Http\Controllers\Api\V1\Rate\RateController;
@@ -53,16 +55,16 @@ Route::prefix('categories')
             ->middleware(['auth:api', 'admin']);
     });
 
-Route::prefix('options')
-    ->group(function () {
-        Route::post('/create', [OptionController::class, 'create'])
-            ->middleware(['auth:api', 'admin']);
-        Route::get('', [OptionController::class, 'index']);
-        Route::put('/update/{id}', [OptionController::class, 'update'])
-            ->middleware(['auth:api', 'admin']);
-        Route::delete('delete', [OptionController::class, 'delete'])
-            ->middleware(['auth:api', 'admin']);
-    });
+//Route::prefix('options')
+//    ->group(function () {
+//        Route::post('/create', [OptionController::class, 'create'])
+//            ->middleware(['auth:api', 'admin']);
+//        Route::get('', [OptionController::class, 'index']);
+//        Route::put('/update/{id}', [OptionController::class, 'update'])
+//            ->middleware(['auth:api', 'admin']);
+//        Route::delete('delete', [OptionController::class, 'delete'])
+//            ->middleware(['auth:api', 'admin']);
+//    });
 
 Route::prefix('media')
     ->group(function () {
@@ -91,4 +93,10 @@ Route::prefix('orders')
         Route::get('', [OrderController::class, 'index'])->middleware(['auth:api', 'admin']);;
         Route::delete('/delete', [OrderController::class, 'delete'])->middleware(['auth:api', 'admin']);;
         Route::put('/update/{id}', [OrderController::class, 'update'])->middleware(['auth:api', 'admin']);;
+    });
+
+Route::prefix('options')
+    ->group(function () {
+        Route::get('/color', [ColorController::class, 'index']);
+        Route::get('/size', [SizeController::class, 'index']);
     });

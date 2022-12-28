@@ -14,8 +14,8 @@ use App\Services\Product\Action\CreateProductAction;
 use App\Services\Product\Action\DeleteProductAction;
 use App\Services\Product\Action\IndexProductAction;
 use App\Services\Product\Action\UpdateProductAction;
+use App\Services\Product\Dto\CreateProductDto;
 use App\Services\Product\Dto\IndexProductDto;
-use App\Services\Product\Dto\ProductDto;
 use App\Services\Product\Dto\UpdateProductDto;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -37,7 +37,7 @@ class ProductController extends Controller
 
     public function create(CreateProductRequest $request): ProductResource
     {
-        $dto = ProductDto::fromRequest($request);
+        $dto = CreateProductDto::fromRequest($request);
 
         return $this->createProductAction->run($dto);
     }

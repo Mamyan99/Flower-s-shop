@@ -13,7 +13,7 @@ class UploadMediaRequest extends FormRequest
         return [
             self::FILE => [
                 'required',
-                'mimes:svg,png',
+                'mimes:svg,png,jpeg',
             ]
         ];
     }
