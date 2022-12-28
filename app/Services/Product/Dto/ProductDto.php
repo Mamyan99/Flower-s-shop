@@ -15,7 +15,7 @@ class ProductDto extends DataTransferObject
     public array $categoriesIds;
     public array $colorsIds;
     public array $sizes;
-    public float $discount;
+    public ?float $discount;
 
     public static function fromRequest(BaseProductRequest $request): self
     {

@@ -96,7 +96,7 @@ class BaseProductRequest extends FormRequest
         return $this->get(self::SIZES);
     }
 
-    public function getDiscount(): float
+    public function getDiscount(): ?float
     {
         return $this->get(self::DISCOUNT);
     }
