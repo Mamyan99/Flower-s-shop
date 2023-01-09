@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1\Product;
 
-use App\Events\GetWebHookEvent;
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\V1\Product\CreateProductRequest;
 use App\Http\Requests\V1\Product\DeleteProductRequest;
 use App\Http\Requests\V1\Product\IndexProductRequest;
 use App\Http\Requests\V1\Product\UpdateProductRequest;
 use App\Http\Resources\V1\Product\ProductResource;
-use App\Listener\ChangeProductBoughtCountListener;
 use App\Services\Product\Action\CreateProductAction;
 use App\Services\Product\Action\DeleteProductAction;
 use App\Services\Product\Action\IndexProductAction;
@@ -19,6 +17,7 @@ use App\Services\Product\Dto\IndexProductDto;
 use App\Services\Product\Dto\UpdateProductDto;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Artisan;
 
 class ProductController extends Controller
 {

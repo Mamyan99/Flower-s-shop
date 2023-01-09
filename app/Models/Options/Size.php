@@ -36,11 +36,16 @@ class Size extends Model
         return BaseConstans::SIZE_INDEX;
     }
 
-    public function toSearchableArray(): array
+//    public function toSearchableArray(): array
+//    {
+//        return Arr::only(
+//            $this->toArray(),
+//            [BaseConstans::VALUE, BaseConstans::UNIT_OF_MEASUREMENT]
+//        );
+//    }
+
+    protected function makeAllSearchableUsing($query)
     {
-        return Arr::only(
-            $this->toArray(),
-            [BaseConstans::VALUE, BaseConstans::UNIT_OF_MEASUREMENT]
-        );
+        return $query->with(['product']);
     }
 }

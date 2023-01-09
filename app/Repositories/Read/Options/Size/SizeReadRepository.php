@@ -11,16 +11,20 @@ class SizeReadRepository implements SizeReadRepositoryInterface
 {
     public function index(IndexSizeDto $dto): LengthAwarePaginator
     {
-        return $this->query()->paginate(
-            $dto->queryListDto->perPage,
-            ['*'],
-            'page',
-            $dto->queryListDto->page
-        );
+        return Size::search($dto->queryListDto->q)
+            ->query(function (Builder $query) {
+                $query->with(['product']);
+            })->paginate(
+                $dto->queryListDto->perPage,
+                'page',
+                $dto->queryListDto->page
+            );
     }
-
-    private function query(): Builder
+    public function getByIds(array $ids, array $sizeIds, array $relations = [])
     {
-        return Size::query();
+        return Size::query()
+            ->whereIn('id', $sizeIds)
+            ->with(['product'])
+            ->get();
     }
 }

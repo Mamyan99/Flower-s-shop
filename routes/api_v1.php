@@ -49,9 +49,11 @@ Route::prefix('categories')
         Route::post('/create', [CategoryController::class, 'create'])
             ->middleware(['auth:api', 'admin']);
         Route::get('', [CategoryController::class, 'index']);
-        Route::put('/update/{id}', [CategoryController::class, 'update'])
+        Route::post('/update/{id}', [CategoryController::class, 'update'])
             ->middleware(['auth:api', 'admin']);
         Route::delete('delete', [CategoryController::class, 'delete'])
+            ->middleware(['auth:api', 'admin']);
+        Route::get('/{id}', [CategoryController::class, 'show'])
             ->middleware(['auth:api', 'admin']);
     });
 

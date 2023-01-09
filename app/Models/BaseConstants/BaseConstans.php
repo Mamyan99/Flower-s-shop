@@ -18,4 +18,5 @@ class BaseConstans
     const COLORS_INDEX  = 'colors_index';
     const SIZE_INDEX  = 'size_index';
     const UNIT_OF_MEASUREMENT = 'unit_of_measurement';
+    const SIZE = 'size';
 }

@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 class UpdateSortableAttributesCommand extends Command
 {
     protected $signature = 'sorts:update';
-    protected $description = 'Command description';
+    protected $description = 'Updating SortingAttributes for sort.';
 
     public function handle(GetSortingAttributesUseCase $getSortingAttributesUseCase)
     {

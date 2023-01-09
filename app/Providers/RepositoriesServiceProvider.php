@@ -16,6 +16,8 @@ use App\Repositories\Read\Order\OrderReadRepository;
 use App\Repositories\Read\Order\OrderReadRepositoryInterface;
 use App\Repositories\Read\Product\ProductReadRepository;
 use App\Repositories\Read\Product\ProductReadRepositoryInterface;
+use App\Repositories\Read\ProductSize\ProductSizeReadRepository;
+use App\Repositories\Read\ProductSize\ProductSizeReadRepositoryInterface;
 use App\Repositories\Read\Rate\RateReadRepository;
 use App\Repositories\Read\Rate\RateReadRepositoryInterface;
 use App\Repositories\Read\ShopCart\ShopCartReadRepository;
@@ -119,6 +121,10 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(
             SizeReadRepositoryInterface::class,
             SizeReadRepository::class
+        );
+        $this->app->bind(
+            ProductSizeReadRepositoryInterface::class,
+            ProductSizeReadRepository::class
         );
     }
 }

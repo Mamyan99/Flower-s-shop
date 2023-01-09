@@ -24,6 +24,7 @@ class CategoryResource extends JsonResource
             'slug' => $this->resource->slug,
             'short_description' => $this->resource->short_description,
             'description' => $this->resource->description,
+            'created_at' => $this->resource->created_at,
             'sub_categories' => SubCategoryResource::collection($this->whenLoaded('children')),
             'media' => MediaResource::collection($this->whenLoaded('image')),
         ];

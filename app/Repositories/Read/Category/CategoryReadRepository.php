@@ -13,8 +13,11 @@ class CategoryReadRepository implements CategoryReadRepositoryInterface
     public function index(IndexCategoryDto $dto): LengthAwarePaginator
     {
         return Category::search($dto->queryListDto->q)
-            ->query(function (Builder $query) {
-                $query->with(['children', 'image']);
+            ->when($dto->queryListDto->sortValue, function ($query) use ($dto) {
+                return $query->orderBy($dto->queryListDto->sortValue, $dto->queryListDto->sort);
+            })->query(function (Builder $query) {
+                $query->whereNull('parent_id')
+                    ->with(['children', 'image']);
         })->paginate(
                 $dto->queryListDto->perPage,
                 'page',

@@ -12,9 +12,6 @@ class IndexProductRequest extends QueryListRequest
     const MIN_VALUE = 'min';
     const MAX_VALUE = 'max';
     const FILTER_VALUE = 'filter_value';
-    const SORT_VALUE = 'sort_value';
-    const SORT = 'sort';
-
 
     public function rules(): array
     {
@@ -43,15 +40,6 @@ class IndexProductRequest extends QueryListRequest
                 'string',
                 'nullable',
             ],
-            self::SORT_VALUE => [
-                'string',
-                'nullable',
-            ],
-            self::SORT => [
-                'string',
-                'in:asc,desc',
-                'nullable',
-            ],
         ];
     }
 
@@ -78,16 +66,6 @@ class IndexProductRequest extends QueryListRequest
     public function getMax(): ?int
     {
         return $this->get(self::MAX_VALUE) ?? null;
-    }
-
-    public function getSort(): ?string
-    {
-        return $this->get(self::SORT) ?? null;
-    }
-
-    public function getSortValue(): ?string
-    {
-        return $this->get(self::SORT_VALUE) ?? null;
     }
 
     public function getFilterValue(): ?string

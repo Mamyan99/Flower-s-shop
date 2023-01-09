@@ -70,7 +70,7 @@ class Category extends Model implements HasMedia
         $this->description = $dto->categoryDto->description;
     }
 
-    public function setParentId(string|null $parentId): void
+    public function setParentId(?string $parentId): void
     {
         $this->parent_id = $parentId;
     }
@@ -97,7 +97,7 @@ class Category extends Model implements HasMedia
 
     public function children(): HasMany
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id')->with('image');
+        return $this->hasMany(Category::class, 'parent_id', 'id')->with(['image', 'children']);
     }
 
     public function product(): BelongsToMany
@@ -123,7 +123,7 @@ class Category extends Model implements HasMedia
     {
         return Arr::only(
             $this->toArray(),
-            [BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION]
+            [BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION, BaseConstans::CREATED_AT]
         );
     }
 }

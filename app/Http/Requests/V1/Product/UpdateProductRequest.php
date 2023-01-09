@@ -7,7 +7,7 @@ class UpdateProductRequest extends BaseProductRequest
 {
     const ID = 'id';
 
-    public function rules()
+    public function rules(): array
     {
         return [
             self::ID => [

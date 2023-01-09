@@ -9,6 +9,8 @@ class QueryListRequest extends FormRequest
     const Q = 'query';
     const PAGE = 'page';
     const PER_PAGE = 'perPage';
+    const SORT_VALUE = 'sort_value';
+    const SORT = 'sort';
 
     const DEFAULT_PAGE = 1;
     const DEFAULT_PER_PAGE = 10;
@@ -28,6 +30,15 @@ class QueryListRequest extends FormRequest
                 'integer',
                 'nullable',
             ],
+            self::SORT_VALUE => [
+                'string',
+                'nullable',
+            ],
+            self::SORT => [
+                'string',
+                'in:asc,desc',
+                'nullable',
+            ],
         ];
     }
 
@@ -44,5 +55,15 @@ class QueryListRequest extends FormRequest
     public function getPerPage(): ?int
     {
         return $this->get(self::PER_PAGE) ?? self::DEFAULT_PER_PAGE;
+    }
+
+    public function getSort(): ?string
+    {
+        return $this->get(self::SORT) ?? null;
+    }
+
+    public function getSortValue(): ?string
+    {
+        return $this->get(self::SORT_VALUE) ?? null;
     }
 }

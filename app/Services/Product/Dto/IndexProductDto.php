@@ -13,9 +13,7 @@ class IndexProductDto extends DataTransferObject
     public ?array $sizeIds;
     public ?int $minValue;
     public ?int $maxValue;
-    public ?string $sort;
     public ?string $filterValue;
-    public ?string $sortValue;
     public QueryListDto $queryListDto;
 
     public static function fromRequest(IndexProductRequest $request): self
@@ -27,8 +25,6 @@ class IndexProductDto extends DataTransferObject
             minValue: $request->getMin(),
             maxValue: $request->getMax(),
             filterValue: $request->getFilterValue(),
-            sort: $request->getSort(),
-            sortValue: $request->getSortValue(),
             queryListDto: QueryListDto::fromRequest($request)
         );
     }
