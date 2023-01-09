@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\V1\Category;
 
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategoryRequest extends BaseCategoryRequest
+class ShowCategoryRequest extends FormRequest
 {
     const ID = 'id';
 

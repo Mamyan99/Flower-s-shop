@@ -20,7 +20,6 @@ class CategoryDto extends DataTransferObject
 
     public static function fromRequest(BaseCategoryRequest $request): self
     {
-
         $subCategories = collect();
 
         foreach ($request->getSubCategories() as $category) {

@@ -160,7 +160,7 @@ class Product extends Model
             'product_size',
             'product_id',
             'size_id',
-        )->withPivot(['size_id', 'product_id', 'price', 'currency']);
+        )->withPivot(['size_id', 'product_id', 'price', 'currency'])->orderBy('price', 'desc');
     }
 
     public function searchableAs(): string
@@ -168,15 +168,20 @@ class Product extends Model
         return BaseConstans::PRODUCTS_INDEX;
     }
 
-    public function toSearchableArray(): array
+//    public function toSearchableArray(): array
+//    {
+//        $array = $this->only(BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION, BaseConstans::PRICE);
+//
+//        $related = $this->with(['category', 'color', 'size', 'media', 'rates'])
+//            ->where('id', $this->id)
+//            ->first()
+//            ->toArray();
+//
+//        return array_merge($array, $related);
+//    }
+
+    protected function makeAllSearchableUsing($query)
     {
-        $array = $this->only(BaseConstans::NAME, BaseConstans::SHORT_DESCRIPTION, BaseConstans::DESCRIPTION, BaseConstans::PRICE);
-
-        $related = $this->with(['category', 'color', 'size', 'media', 'rates'])
-            ->where('id', $this->id)
-            ->first()
-            ->toArray();
-
-        return array_merge($array, $related);
+        return $query->with(['category', 'color', 'size', 'media', 'rates']);
     }
 }

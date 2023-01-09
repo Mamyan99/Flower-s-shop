@@ -13,8 +13,8 @@ class ProductReadRepository implements ProductReadRepositoryInterface
     public function index(IndexProductDto $dto): LengthAwarePaginator
     {
         return Product::search($dto->queryListDto->q)
-            ->when($dto->sortValue, function ($query) use ($dto) {
-            return $query->orderBy($dto->sortValue, $dto->sort);
+            ->when($dto->queryListDto->sortValue, function ($query) use ($dto) {
+            return $query->orderBy($dto->queryListDto->sortValue, $dto->queryListDto->sort);
         })->query(function (Builder $query) use ($dto) {
                 $this->filter($query, $dto);
         })->paginate(
@@ -38,6 +38,14 @@ class ProductReadRepository implements ProductReadRepositoryInterface
         return $product;
     }
 
+    public function getByIds(array $ids, array $relations = [])
+    {
+        return $this->query()
+            ->whereIn('id', $ids)
+            ->with(['category', 'color', 'size', 'media'])
+            ->get();
+    }
+
     private function query(): Builder
     {
         return Product::query();
@@ -46,12 +54,22 @@ class ProductReadRepository implements ProductReadRepositoryInterface
     private function filter(Builder $query, IndexProductDto $dto): void
     {
         $query
-            ->when($dto->minValue, function ($query) use ($dto) {
-             $query->where($dto->filterValue, '>', $dto->minValue);
-        })->when($dto->maxValue, function ($query) use ($dto) {
-                return $query->where($dto->filterValue, '<', $dto->maxValue);
+            ->when($dto->minValue, function (Builder $query) use ($dto) {
+                return ($dto->filterValue === 'price') ?
+                        $query->whereHas('size', function ($q) use ($dto) {
+                            $q->where($dto->filterValue, '>', $dto->minValue);
+                       }) : $query->where($dto->filterValue, '>', $dto->minValue);
+            })->when($dto->maxValue, function ($query) use ($dto) {
+                return ($dto->filterValue === 'price') ?
+                    $query->whereHas('size', function ($q) use ($dto) {
+                        $q->where($dto->filterValue, '<', $dto->maxValue);
+                    }): $query->where($dto->filterValue, '<', $dto->maxValue);
         })->when($dto->minValue & $dto->maxValue, function ($query) use ($dto) {
-                return $query->where($dto->filterValue, '>', $dto->minValue)
+                return ($dto->filterValue === 'price') ?
+                    $query->whereHas('size', function ($q) use ($dto) {
+                        $q->where($dto->filterValue, '>', $dto->minValue)
+                            ->where($dto->filterValue, '<', $dto->maxValue);
+                    }) : $query->where($dto->filterValue, '>', $dto->minValue)
                     ->where($dto->filterValue, '<', $dto->maxValue);
         })->when($dto->categoriesIds, function ($query) use ($dto) {
                 $query->whereHas('category', function ($q) use ($dto) {

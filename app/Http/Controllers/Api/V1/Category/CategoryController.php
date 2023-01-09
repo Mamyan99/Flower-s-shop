@@ -6,16 +6,18 @@ use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\V1\Category\CreateCategoryRequest;
 use App\Http\Requests\V1\Category\DeleteCategoryRequest;
 use App\Http\Requests\V1\Category\IndexCategoryRequest;
+use App\Http\Requests\V1\Category\ShowCategoryRequest;
 use App\Http\Requests\V1\Category\UpdateCategoryRequest;
-use App\Http\Requests\V1\Media\UploadMediaRequest;
 use App\Http\Resources\V1\Category\CategoryResource;
 use App\Services\Category\Action\CreateCategoryAction;
 use App\Services\Category\Action\DeleteCategoryAction;
 use App\Services\Category\Action\IndexCategoryAction;
+use App\Services\Category\Action\ShowCategoryAction;
 use App\Services\Category\Action\UpdateCategoryAction;
 use App\Services\Category\Dto\CategoryDto;
 use App\Services\Category\Dto\CreateCategoryDto;
 use App\Services\Category\Dto\IndexCategoryDto;
+use App\Services\Category\Dto\ShowCategoryDto;
 use App\Services\Category\Dto\UpdateCategoryDto;
 use App\Services\Media\Action\UploadMediaAction;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -29,7 +31,8 @@ class CategoryController extends Controller
         protected DeleteCategoryAction $deleteCategoryAction,
         protected UpdateCategoryAction $updateCategoryAction,
         protected IndexCategoryAction  $indexCategoryAction,
-        protected UploadMediaAction $uploadMediaAction
+        protected UploadMediaAction $uploadMediaAction,
+        protected ShowCategoryAction $showCategoryAction
     ) {}
 
     public function index(IndexCategoryRequest $request): AnonymousResourceCollection
@@ -37,6 +40,13 @@ class CategoryController extends Controller
         $dto = IndexCategoryDto::fromRequest($request);
 
         return $this->indexCategoryAction->run($dto);
+    }
+
+    public function show(ShowCategoryRequest $request): CategoryResource
+    {
+        $dto = ShowCategoryDto::fromRequest($request);
+
+        return $this->showCategoryAction->run($dto);
     }
 
     public function create(CreateCategoryRequest $request): JsonResource

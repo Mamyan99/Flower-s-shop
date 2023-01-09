@@ -2,6 +2,7 @@
 
 namespace App\Services\Product\Action;
 
+use App\Events\ImportProductsToIndexEvent;
 use App\Http\Resources\V1\Product\ProductResource;
 use App\Models\Product\Product;
 use App\Repositories\Write\Product\ProductWriteRepositoryInterface;
@@ -29,6 +30,8 @@ class CreateProductAction
             $sizes,
             $dto->productDto->mediaIds
         );
+
+        ImportProductsToIndexEvent::dispatch();
 
         return new ProductResource($product);
     }

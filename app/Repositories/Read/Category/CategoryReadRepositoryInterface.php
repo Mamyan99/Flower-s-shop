@@ -9,5 +9,5 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface CategoryReadRepositoryInterface
 {
     public function index(IndexCategoryDto $dto): LengthAwarePaginator;
-    public function getById(string $id): Category;
+    public function getById(string $id, array $relations = []): Category;
 }
