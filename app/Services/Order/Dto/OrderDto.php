@@ -8,7 +8,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class OrderDto extends DataTransferObject
 {
     public string $costumerUniqKey;
-    public array  $productIds;
+    public array  $shopCartIds;
     public string $firstName;
     public string $lastName;
 //    public ?string $country;
@@ -24,7 +24,7 @@ class OrderDto extends DataTransferObject
     {
         return new self(
             costumerUniqKey: $request->getCostumerUniqKey(),
-            productIds: $request->getProductIds(),
+            shopCartIds: $request->getProductIds(),
             firstName: $request->getFirstName(),
             lastName: $request->getLastName(),
 //            country: $request->getCountry(),

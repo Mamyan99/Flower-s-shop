@@ -10,5 +10,4 @@ interface ProductReadRepositoryInterface
 {
     public function index(IndexProductDto $dto): LengthAwarePaginator;
     public function getById(string $id, array $relations = []): Product;
-    public function getByIds(array $ids, array $relations = []);
 }

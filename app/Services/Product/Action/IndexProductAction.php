@@ -20,13 +20,6 @@ class IndexProductAction
     {
         $products = $this->productReadRepository->index($dto);
 
-        if($dto->queryListDto->sortValue === 'price') {
-            $price = $this->productSizeRepository->sortPrice($dto->queryListDto->sort);
-            $productIds = $price->pluck('product_id')->toArray();
-            $sizeIds = $price->pluck('product_id')->toArray();
-            $products = $this->productReadRepository->getByIds($productIds);
-        }
-
         return ProductResource::collection($products);
     }
 }
