@@ -25,10 +25,12 @@ class CreateOrderAction
         $products = [];
 
         foreach ($shopCarts as $shopCart) {
-            $price = ($shopCart->product->discount)?$shopCart->product->price - ($shopCart->product->price * $shopCart->product->discount)/100 : $shopCart->product->price;
-            $productsPrice = $price * $shopCart->products_count;
-            $total = $total + $productsPrice;
-            $products[$shopCart->product->id] = ['order_product_count' => $shopCart->products_count];
+            dd($shopCart->product->pivot->price);
+//            $price = ($shopCart->product->discount)?$shopCart->product->price - ($shopCart->product->price * $shopCart->product->discount)/100 : $shopCart->product->price;
+//            $productsPrice = $price * $shopCart->products_count;
+//            $total = $total + $productsPrice;
+//            $products[$shopCart->product->id] = ['order_product_count' => $shopCart->products_count];
+
         }
 
         $order = Order::create($dto);

@@ -12,16 +12,16 @@ class ProductReadRepository implements ProductReadRepositoryInterface
 {
     public function index(IndexProductDto $dto): LengthAwarePaginator
     {
-        return Product::search($dto->queryListDto->q)
-            ->when($dto->queryListDto->sortValue, function ($query) use ($dto) {
-            return $query->orderBy($dto->queryListDto->sortValue, $dto->queryListDto->sort);
-        })->query(function (Builder $query) use ($dto) {
-                $this->filter($query, $dto);
-        })->paginate(
-                $dto->queryListDto->perPage,
-                'page',
-                $dto->queryListDto->page
-            );
+            return Product::search($dto->queryListDto->q)
+                ->when($dto->queryListDto->sortValue, function ($query) use ($dto) {
+                    return $query->orderBy($dto->queryListDto->sortValue, $dto->queryListDto->sort);
+                })->query(function (Builder $query) use ($dto) {
+                    $this->filter($query, $dto);
+                })->paginate(
+                    $dto->queryListDto->perPage,
+                    'page',
+                    $dto->queryListDto->page
+                );
     }
 
     public function getById(string $id, array $relations = []): Product
@@ -36,14 +36,6 @@ class ProductReadRepository implements ProductReadRepositoryInterface
         }
 
         return $product;
-    }
-
-    public function getByIds(array $ids, array $relations = [])
-    {
-        return $this->query()
-            ->whereIn('id', $ids)
-            ->with(['category', 'color', 'size', 'media'])
-            ->get();
     }
 
     private function query(): Builder

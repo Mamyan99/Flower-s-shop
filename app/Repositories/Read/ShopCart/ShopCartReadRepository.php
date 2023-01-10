@@ -58,7 +58,7 @@ class ShopCartReadRepository implements ShopCartReadRepositoryInterface
     public function getShopCarts(CreateOrderDto $dto, array $relations = []): Collection|array
     {
         $shopCarts = $this->query()
-            ->whereIn('product_id', $dto->orderDto->productIds)
+            ->whereIn('id', $dto->orderDto->shopCartIds)
             ->where('costumer_uniq_key', $dto->orderDto->costumerUniqKey)
             ->with($relations)
             ->get();

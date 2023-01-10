@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class BaseOrderRequest extends FormRequest
 {
     const COSTUMER_UNIQ_KEY = 'costumer_uniq_key';
-    const PRODUCT_IDS = 'product_ids';
+    const SHOP_CART_IDS = 'shop_cart_ids';
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const COUNTRY = 'country';
@@ -26,7 +26,7 @@ class BaseOrderRequest extends FormRequest
                 'string',
                 'required',
             ],
-            self::PRODUCT_IDS => [
+            self::SHOP_CART_IDS => [
                 'array',
                 'required',
             ],
@@ -80,7 +80,7 @@ class BaseOrderRequest extends FormRequest
 
     public function getProductIds(): array
     {
-        return $this->get(self::PRODUCT_IDS);
+        return $this->get(self::SHOP_CART_IDS);
     }
 
     public function getFirstName(): string

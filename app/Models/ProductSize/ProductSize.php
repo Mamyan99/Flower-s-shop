@@ -3,8 +3,10 @@
 namespace App\Models\ProductSize;
 
 use App\Models\BaseConstants\BaseConstans;
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
 
@@ -14,6 +16,11 @@ class ProductSize extends Model
     use Searchable;
 
     protected $table = 'product_size';
+
+    public function productSize(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 
     public function searchableAs(): string
     {

@@ -9,6 +9,7 @@ use App\Models\Option\Option;
 use App\Models\Options\Color;
 use App\Models\Options\Size;
 use App\Models\Order\Order;
+use App\Models\ProductSize\ProductSize;
 use App\Models\Rate\Rate;
 use App\Models\ShopCart\ShopCart;
 use App\Services\Product\Dto\CreateProductDto;
@@ -160,7 +161,7 @@ class Product extends Model
             'product_size',
             'product_id',
             'size_id',
-        )->withPivot(['size_id', 'product_id', 'price', 'currency'])->orderBy('price', 'desc');
+        )->withPivot(['size_id', 'product_id', 'price', 'currency']);
     }
 
     public function searchableAs(): string
@@ -183,5 +184,12 @@ class Product extends Model
     protected function makeAllSearchableUsing($query)
     {
         return $query->with(['category', 'color', 'size', 'media', 'rates']);
+    }
+
+    public function priceSort()
+    {
+        return $this->belongsTo(ProductSize::class, 'id', 'product_id')
+            ->selectRaw('price')
+            ->orderby('price', 'desc');
     }
 }
